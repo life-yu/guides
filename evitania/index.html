@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>에비타니아 — 단계별</title>
+<title>에비타니아 가이드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
@@ -12,216 +12,364 @@
 :root[data-theme="dark"]{--paper:#111513;--surface:#171C19;--surface-2:#1E2421;--ink:#E7EBE6;--ink-2:#A4AFA7;--ink-3:#7C867E;--rule:#2A322D;--ember:#E88250;--ember-bg:#2C1E17;--ok:#63B183;--ok-bg:#16241B;--warn:#D6A63F;--warn-bg:#2A2415;--unk:#93A4B1;--unk-bg:#1C2226}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;font-size:15.5px;line-height:1.6}
-main{max-width:960px;margin:0 auto;padding:20px 16px 80px}
+main{max-width:980px;margin:0 auto;padding:20px 16px 80px}
 h1{font-size:24px;margin:0 0 2px}
-.sub{color:var(--ink-3);font-size:13px;margin-bottom:14px}
+a{color:var(--ember)}
+.sub{color:var(--ink-3);font-size:13px;margin-bottom:10px}
 nav.tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;background:var(--paper);padding:8px 0;z-index:2;border-bottom:1px solid var(--rule)}
 nav.tabs button{font:inherit;font-size:14px;font-weight:600;padding:7px 14px;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);border-radius:20px;cursor:pointer}
 nav.tabs button.on{background:var(--ember);border-color:var(--ember);color:#fff}
-section.tab{display:none}section.tab.on{display:block}
+section.tab{display:none;scroll-margin-top:9999px}section.tab.on{display:block}
 h2{font-size:20px;margin:22px 0 4px}
 h3{font-size:16px;margin:22px 0 6px;padding-left:10px;border-left:4px solid var(--ember)}
-.goal{background:var(--ok-bg);border-left:4px solid var(--ok);padding:10px 14px;border-radius:4px;margin:10px 0 6px;font-size:15px}
-.goal b{color:var(--ok)}
-.now{background:var(--warn-bg);border-left:4px solid var(--warn);padding:8px 12px;border-radius:4px;margin:6px 0 16px;font-size:14px}
+.ans{background:var(--ok-bg);border-left:4px solid var(--ok);padding:10px 14px;border-radius:4px;margin:10px 0 12px;font-size:15.5px}
+.ans b{color:var(--ok)}
+.goal{background:var(--surface);border-left:4px solid var(--rule);padding:10px 14px;border-radius:4px;margin:10px 0 6px;font-size:14px;color:var(--ink-2)}
+.goal b{color:var(--ink)}
 table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 10px;background:var(--surface)}
 th,td{border:1px solid var(--rule);padding:7px 10px;text-align:left;vertical-align:top}
-th{background:var(--surface-2);font-weight:600}
-td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
-.tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:10px;font-weight:600;background:var(--unk-bg);color:var(--unk);vertical-align:middle}
+th{background:var(--surface-2);font-weight:600;white-space:nowrap}
+td.n,th.n{text-align:right;white-space:nowrap}td.n{font-family:"IBM Plex Mono",monospace}
+table.kv th{white-space:nowrap;width:1%}
 ul,ol{padding-left:20px;margin:4px 0}li{margin:3px 0}
 .mono{font-family:"IBM Plex Mono",monospace;font-size:13px}
 small{color:var(--ink-3)}
 p{margin:4px 0 8px}
-ul.chk{list-style:none;padding-left:0;margin:6px 0}ul.chk li{margin:4px 0;font-size:15px}ul.chk li.ok{color:var(--ok)}ul.chk li.no{color:var(--ink)}ul.chk li.no::first-letter{color:var(--ember)}.chksum{margin:6px 0 0}ol.todo>li{margin:10px 0}ol.todo ul{margin-top:4px}
-table.chk td{vertical-align:top}table.chk tr.ok td{color:var(--ink-3)}table.chk tr.ok td.m{color:var(--ok)}table.chk tr.no td.m{color:var(--ember)}table.chk td.m{text-align:center;font-weight:700;font-size:16px}
+.chksum{margin:6px 0}
+table.chk tr.ok td{color:var(--ink-3)}table.chk tr.ok td.m{color:var(--ok)}table.chk tr.no td.m{color:var(--ember)}
+table.chk td.m{text-align:center;font-weight:700;font-size:16px;width:34px}
+table.chk tr.has-why{cursor:pointer}
+table.chk tr.has-why>td:first-child::after{content:" ▸";color:var(--ink-3);font-size:12px}
+table.chk tr.has-why.open>td:first-child::after{content:" ▾"}
+table.chk tr.why{display:none}table.chk tr.why.on{display:table-row}
+table.chk tr.why td{background:var(--surface-2);color:var(--ink-2);font-size:13.5px}
+body:not(.showdone) details.stage table.chk tr.ok,body:not(.showdone) details.stage table.chk tr.ok+tr.why{display:none}
+.num{display:inline-block;min-width:22px;height:22px;line-height:22px;text-align:center;border-radius:11px;background:var(--ember);color:#fff;font-size:12.5px;font-weight:700;margin-right:7px}
+details.stage{border:1px solid var(--rule);border-radius:6px;margin:10px 0;background:var(--surface)}
+details.stage>summary{cursor:pointer;font-weight:700;font-size:17px;padding:10px 14px}
+details.stage>div{padding:0 14px 10px}
+details.more{margin:6px 0 10px}
+details.more>summary{cursor:pointer;color:var(--ink-2);font-size:14px;padding:4px 0}
+.opt{font-size:13.5px;color:var(--ink-2);margin:10px 0 4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.chips a{font-size:13.5px;padding:4px 11px;border:1px solid var(--rule);border-radius:16px;background:var(--surface);color:var(--ink-2);text-decoration:none}
+.chips a:hover{border-color:var(--ember);color:var(--ember)}
+section.topic{border-top:1px solid var(--rule);margin-top:28px;scroll-margin-top:56px}
+section.topic>h2{margin-top:16px}
+@media (max-width:640px){body{font-size:14.5px}th,td{padding:6px 7px}table{font-size:13.5px;display:block;overflow-x:auto}}
 </style>
 </head>
 <body>
 <main>
-<h1>에비타니아 — 단계별</h1>
-<div class="sub">게임 파일 09-26 추출(10-01 최신 확인) · 세이브 자동 · 커뮤니티(evitaniaonlinedb · 스팀 가이드) 대조. <b>단계 탭 = 시스템별 "이 단계 목표" 표.</b> "지금"과 ✔는 세이브에서 자동으로 채운다 — ✘ 줄만 하면 되고, 전부 ✔ 이면 다음 탭. 운으로 오는 것(큐리오 · 장신구 드랍)과 매일 할 일은 <b>운·매일</b> 탭, 숫자 표는 <b>참고</b> 탭.</div>
-
-<div class="goal"><b>정정 09-26</b> — 채집 하드 배수 ×16 → <b>×6</b>(2단계 채집 14일 → 38일) · 2막 하드/1막 악몽 조건 "보스 각 10회" → <b>각 1회</b>(10회는 대량 상자) · 사냥꾼 "올 25" → <b>3개 25 + 나머지 20</b>(비용 곡선 실측) · 엔지니어 슬롯 업그레이드 4종 전부 생산 속도 · 제물 18~20은 4단계 2막 하드(×16)로 이동, 지금은 노말에서 공격 17·물방 15까지 · 뒤 단계 항목은 그 단계 배수로(킬 수) — 지금 스펙 기준 비교 삭제</div>
-<div class="goal"><b>정정 09-27</b> — 엔지니어 "금화 12→13 먼저" 삭제(<b>금화는 상점용</b>) · 슬롯2~4 금화 가격 오류(슬롯별 곡선 1.5만·5만·15만 ×2ⁿ) · "표 뒤 ×2" → <b>항목 순환</b> 비용 · 속도 결합식 덧셈 × 젬 2배 실측 · 슬롯1만이 아니라 <b>4슬롯 비율</b>(3.59 : 2.18 : 2.73 : 1)로 · 엔지니어·채집 특성을 1~4단계 탭에 단계별로 분산 · 02:05 1단계 슬롯1 +4 → <b>+12</b>(공급≥수요 검사, +4는 슬롯3 누락) · 02:55 <b>탭 재분류</b>: 단계 = 캐릭이 어디 있나, 각 탭엔 그 단계에서 손대는 것만, 긴 표·설명은 새 <b>참고</b> 탭 · 03:15 QA: 2단계 4번 = 2막 노말 제물 담당(토륨은 3단계) · 3단계 "사냥꾼 42·제물 전부 20" 삭제(근거 없음, 16 이상은 4단계) · 하드 보스 입장에 열쇠 안 씀으로 통일 · 슬롯2는 총 +5까지만(+7이면 아이디어 다시 부족)</div>
-
-<div class="goal"><b>정정 09-28 04:05</b> — 타임라인 트리 비용 오독(8바이트 값을 4바이트로 읽음): 방어 ×1.10 "7.85 IP" → <b>243 IP</b>(경로 합 248), 공격 ×1.10 → <b>256</b>. 지금 은행으로 되는 건 사암 샘플 1 · 3 · 4 까지. 1단계 부캐 방어는 원래대로 <b>물방 제물 12 + 방어구 +5</b>. 다이아는 타임라인 엔진 속도(0/4) 먼저 — 방어 243 까지 약 20시간 → 10시간</div>
-<div class="goal"><b>정정 09-28</b> — <b>단계 탭을 시스템별 목표 표로</b>(사냥꾼 노드별 · 제물 종류별 · 엔지니어 슬롯 배율 · 노드 · 다이아 · 룬 · 강화 · 보스 · 카드), 지금 값은 세이브 자동 · <b>부캐 토륨 무기 안 만듦</b>: 매바스 방어 0(파일 스탯 번호표 — 9번은 방어가 아니라 마법 공격) → 무기는 시간만 줄이고 관문은 방어(커뮤니티 "보스는 방어 약 1,300"). 부캐 방어 계산 1,200~1,235(tools/combat.py) → 1단계 = 물방 제물 12 + 방어구 +5 → 1,325~1,363 · 구판 방어 계산의 물방 제물 배수 ×1.63 → 파일 ×1.5 · 사냥꾼 이름표 확정(위력 = LeBabka_Str · 방어 = LeBabka_Men · 힘 = LeBabka_PAtk) · 제물 비용 손계산 오류 10→15 36,927 → 62,333 등(표를 파일 곡선 자동으로)</div>
-<div class="goal"><b>정정 09-29</b> — 보스 카드 "요툰 48에서 끝" → <b>지금 최대는 3성</b>(전령·이르사이니르 60장 · 게·요툰·매바스·매머드 100장), 4성(360 · 600장)은 태양 "4성 카드" 노드 뒤. 이르사이니르 "100장 = 4성" → <b>60장 = 3성(최대)</b>, 4성은 360장 · 보스 카드 순서를 열쇠 기준으로(카드 1장 ≈ 열쇠 2개): 전령 24 → 매바스 12 → 48 → 게 48 → 요툰 100 → 매머드 48 · 노르딕 "목걸이" → <b>부적</b>(장착 칸 = 부적, 토끼 발도 부적) · 모래시계는 <b>길드 주간 채굴·벌목 카운트에 들어간다</b>(1시간 → +346 실측) · 인피니트 I 강철 원재료 · 파티 던전 상점 순서 추가</div>
-<div class="goal"><b>정정 10-01</b> — <b>다중제작 누락</b>: 용광로 다중제작 4렙은 제련 1회에 3개가 나온다(철 주괴 · 숯 · 강철 단계마다 ÷3). 인피니트 I 강철 원재료(4명분) 철광석 6,912,000 → <b>768,000</b> · 물푸레 11,059,200 → <b>1,228,800</b> · 파이어우드 4,608,000 → <b>512,000</b>, 제련 230만 회 → 약 36만 회. 선스톤 야자 988만 → 약 110만 · <b>다이아</b>: 2단계 "큐리오 인벤 2 · 용광로 용량 1" 삭제(인벤 8칸 중 5칸 사용 · 용광로 2칸으로 안 밀림 — 조건이 생길 때만). 다이아로 살 건 발전기 속도 4(350 · 500 · 650)뿐. "다이아 가격은 파일에 없음" → 파일에 있었다(참고 탭 가격표) · <b>큐리오</b>: "계열당 1개" 삭제 — 이름만 다르면 같은 계열도 같이 끼고 효과가 합쳐진다. 전투 계열은 보라부터라 그때까지 5번째 칸은 임시. 큐리오 이름을 게임 화면 표기로(방종의 성배 → 방종의 잔 · 백년의 서 → 세기의 고서 · 항아리병 → 항아리 물병 등) · 매일 "큐리오 무료 롤 2회" → 1개 · 지금 스펙 "엔진 속도 1/1" → 발전기 속도 1/4 · 타임라인 엔진 속도 4/4</div>
-<div class="goal"><b>정정 10-03</b> — <b>인피니트 I 보스 재료</b>(4명분) 각 4,000 → <b>각 8,000</b>: 풀 핵은 하드 보스 드랍이 아니라 게의 곡괭이 · 용의 뿔 · 죽음의 꽃 각 1,000 으로 만드는 제작품이라 1명분이 각 2,000 이다. 보스 재료는 1막 하드 보스 상자 1회 100개, 상자는 초원 열쇠 I(1막 하드 몹, 실측 하루 2~4개)로 연다 · <b>제련 시간 추가</b>: 강철 1회 60.5초(3개) → 1명분 강철 27일 · 4명분 108일 — "기다림의 정체"에서 제일 긴 줄(옛 글의 "파란 물질 80일 · 초원석 넉 달"은 틀린 값: 파란 물질은 3막 상인 재고 1렙이라 하루 4개 = 60일, 초원석은 1·3번 1막 하드 실측 시간당 950 = 22일)</div>
-
+<h1>에비타니아 가이드</h1>
+<div class="sub">세이브 <span id="stamp">10-03 14:03</span> 기준 · 숫자는 게임 파일과 세이브에서 자동으로 채운다 · 틀렸던 것은 <a href="#fix">정정 이력</a></div>
 <nav class="tabs">
-<button data-t="s1" class="on">1단계 · 부캐 방어 → 3막</button>
-<button data-t="s2">2단계 · 4캐릭 1막 하드</button>
-<button data-t="s3">3단계 · 인피니트 I · 선스톤</button>
-<button data-t="s4">4단계 · 2막 하드 이후</button>
-<button data-t="luck">운·매일</button>
-<button data-t="ref">참고</button>
+<button data-t="todo" class="on">지금 할 일</button>
+<button data-t="stage">단계별</button>
+<button data-t="topic">주제별</button>
 <button data-t="now">지금 스펙</button>
+<button data-t="fix">정정 이력</button>
 </nav>
 
-<!-- ===================== 1단계 ===================== -->
-<section class="tab on" id="s1">
-<h2>1단계 — 부캐 3명 방어 1,300 → 매바스 → 3막 도시</h2>
-<p>부캐 셋은 방어를 올리고 길을 뚫는다. 1번은 1막 하드에서 2단계 재료를 미리 캔다.</p>
-<!-- CHK:s1 -->
+<!-- ===================== 지금 할 일 ===================== -->
+<section class="tab on" id="todo">
+<div class="ans"><b>정한 순서</b>(10-03): 사냥꾼 전 노드 25 → 제물 → 인피니트 I 방어구 재료. 용광로는 알아서 돌린다 · 타임라인은 방치 · 룬은 쌓이는 대로.</div>
+<!-- CHK:todo -->
 <table class="chk">
-<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th><th>어디서 · 왜</th></tr>
-<tr class="ok"><td><b>부캐 방어</b></td><td>2·3·4번 방어 1,300 이상</td><td>2번 1,841 · 3번 1,863 · 4번 1,863</td><td class="m">✔</td><td><small>매바스 = HP 5,000만 · 물리 공격 1,900 · 브레스(마법) 900 · 방어 0(파일). 커뮤니티 기준 "보스 잡으려면 방어 약 1,300". 올리는 법 = 물방 제물 12 + 방어구 +5 → 계산 1,325~1,363. 방어 계산 = tools/combat.py(체력 환산·카드 보너스 제외라 실제는 조금 더 높다)</small></td></tr>
-<tr class="ok"><td><b>타임라인</b></td><td>초기화 1회 → 트리: 사암 샘플 1 → 모래 보너스 3 · 발전기 11 해금 4 (합 8 IP)</td><td>사암 샘플 ✔ · 모래 보너스 ✔ · 발전기 11 ✔ · 은행 576 IP</td><td class="m">✔</td><td><small>무한의 모래시계 레벨 3에서 열림. IP = 5분에 1(시간당 12). 다음 칸(방어 ×1.10 243 · 공격 ×1.10 256)은 2단계 줄. 트리 비용 = python tools/timeline.py</small></td></tr>
-<tr class="ok"><td><b>다이아 (모래시계)</b></td><td>타임라인 엔진 속도 1 (IP 속도 +100%)</td><td>타임라인 엔진 속도 4</td><td class="m">✔</td><td><small>다이아는 여기 먼저(최대 4). 각성 증폭기·추가 균열 일꾼은 이미 삼. 발전기 속도(1/4)는 그다음</small></td></tr>
-<tr class="no"><td><b>제물</b></td><td>물방 12 · 치피 10 · 제련 9 · 채광력 13</td><td>물방 12 · 치피 10 · 제련 9 · 채광력 10/13</td><td class="m">✘</td><td><small>전부 창고 재료로 된다(당근·손상 유리·외알 안경·견과). 레벨마다 재도 든다 — 재는 시간당 약 1,140(09-28 실측)</small></td></tr>
-<tr class="no"><td><b>방어구</b></td><td>부캐 토륨 4부위 +5</td><td>2번 4/5 · 3번 4/5 · 4번 4/5</td><td class="m">✘</td><td><small>강화석 II, +5 성공률 70%. +6 이상은 안 한다(방어 훈련 25가 계정 전체에 준다)</small></td></tr>
-<tr class="ok"><td><b>길</b></td><td>2·3·4번 매바스 잡고 3막 도시(3.0)</td><td>2번 ✔ · 3번 ✔ · 4번 ✔</td><td class="m">✔</td><td><small>방어 1,300 넘은 뒤. 몸에 붙어서 딜, 브레스는 좌우 끝으로, 페이즈 소환 몹 먼저. 입장에 열쇠 안 씀. 도착하면 그 캐릭터도 오벨리스크로 1막 하드를 켠다</small></td></tr>
-<tr class=""><td><b>부캐 무기</b></td><td>안 만든다</td><td>철 무기 그대로</td><td class="m"></td><td><small>매바스 방어가 0이라 무기는 싸움 시간만 줄인다. 관문은 방어다. 2·3단계 부캐 일은 채집. 토륨 무기는 3단계 끝(4단계 2막 하드 사냥 준비)</small></td></tr>
-<tr class="ok"><td><b>사냥꾼</b></td><td>전 노드 20</td><td>위력 26 · 방어 25 · 힘 28 · 나머지 최저 21</td><td class="m">✔</td><td><small>됐다. 1번은 1막 하드에서 2단계 목표(위력·방어·힘 25) 재료를 미리 캔다: 위력 = 5 식물 · 방어 = 3 조약돌 · 힘 = 6 늑대(노란 깃털도 여기서 — 토륨 활 700, 늑대 0.1%라 지금부터 쌓는다)</small></td></tr>
-<tr class="ok"><td><b>엔지니어 속도</b></td><td>아이디어 ×12.0 · 설계도 ×7.2 · 룬 설계도 그대로</td><td>아이디어 ×13.7 (518초) · 설계도 ×8.9 (485초)</td><td class="m">✔</td><td><small>설계도 +3렙 = 재료 12~14(이상한 페이지 · D20 주사위 · 화염 정수 500씩, 창고에 있음) → 태양 1장치 600초 = 태양 슬롯과 같은 속도. 금화 0</small></td></tr>
-<tr class="no"><td><b>엔지니어 태양</b></td><td>태양 슬롯 OFF</td><td>태양 슬롯 ON</td><td class="m">✘</td><td><small>룬 설계도·설계도를 모으는 중. 다시 켜는 건 2단계 끝(4성 카드)</small></td></tr>
-<tr class="no"><td><b>엔지니어 노드</b></td><td>2막 상인 재고 3/3</td><td>2막 상인 재고 2/3</td><td class="m">✘</td><td><small>룬 설계도 1,600. 다음은 2단계 줄</small></td></tr>
-<tr class="no"><td><b>강화</b></td><td>1번 토륨 장검 +10</td><td>토륨 장검 +9</td><td class="m">✘</td><td><small>강화석 II, +10 성공률 20%. 세이브상 장검 내구도 0 — 수리 먼저</small></td></tr>
-<tr class=""><td><b>다이아 · 룬</b></td><td>다이아는 위 모래시계 줄에만 · 룬 장착은 그대로(줄0 PRE×6 · 줄1 GOR-MU-HAS) · 확정 합성만: KI 6 → WER · FUS 6 → YIT · NIL 6 → DOT</td><td>나머지 다이아 상품은 2단계부터</td><td class="m"></td><td><small>룬 판정 = python tools/runes.py. 3개 합성(50%·33%)과 확정(6·9개)은 기대 소모가 같아 확정만 쓴다. WER 은 2단계 APEX-SIRC-WER 재료</small></td></tr>
-<tr class=""><td><b>채집 특성</b></td><td>채광 열1 5_1까지 · 벌목 열1 4_1까지</td><td>포인트 = 직업 렙당 1</td><td class="m"></td><td><small>채광 2_1 치명 ×3 → 3_1 속도 ×4 → 4_1 치피 ×4 → 5_1 다중 ×5 · 벌목 2_1 치피 ×4 → 3_1 속도 ×4 → 4_1 다중 ×2</small></td></tr>
+<tr><th>순서 · 할 일</th><th>목표</th><th>지금</th><th></th></tr>
+<tr class="no has-why"><td><span class="num">1</span><b>사냥꾼</b></td><td>전 노드 25</td><td>위력 26 · 방어 25 · 힘 28 · 나머지 최저 21/25</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">유저 목표(10-01 "전 슬롯 25"). 20→25 = 노드당 약 437,000개(화면 곡선 ×2.89) — 1번 하드 약 3,120/h. 3개 30은 4단계 1막 악몽(×64). 사냥꾼 용광로 속도는 렙당 +0.05(강철 제련이 빨라진다)</td></tr>
+<tr class="no has-why"><td><span class="num">2</span><b>제물</b></td><td>공격 17 · 물방 15 · 드랍 10 · 채광력 15 · 벌목력 15 · 치피 10 · 제련 10</td><td>공격 16/17 · 물방 12/15 · 드랍 11 · 채광력 10/15 · 벌목력 10/15 · 치피 10 · 제련 9/10</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">4번이 2막 노말에서 캔다. 비용은 주제별 탭 "사냥꾼 · 제물" 표(파일 곡선 자동). 16 이상은 4단계 2막 하드(×16). 금화 제물은 여기서 안 올린다 — 노란 물질이 토륨 무기에 먼저 들어가서 3단계 줄로 옮김(10-02)</td></tr>
+<tr class="no has-why"><td><span class="num">3</span><b>인피니트 I 방어구 — 강철 몫 원재료 (4명분)</b></td><td>철광석 768,000 · 물푸레 1,228,800 · 파이어우드 512,000</td><td>철광석 251,496/768,000 · 물푸레 394,930/1,228,800 · 파이어우드 56,391/512,000</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">= 강철 주괴 460,800(1명분 115,200 × 4). 1번도 인피니트 II 재료로 I 세트가 필요해서 4명분. 지금 값 = 창고 원재료 + 가진 강철·철 주괴·숯을 원재료로 되돌린 것. 레시피(파일): 강철 1 = 철 주괴 3 + 숯 1 · 철 주괴 1 = 철광석 5 + 물푸레 8 · 숯 1 = 파이어우드 10. <b>다중제작 4렙이라 제련 1회에 3개</b>가 나온다 → 강철 1개 = 철광석 1.67 · 물푸레 2.67 · 파이어우드 1.11. 제련 횟수 = 4명분 약 36만 회(철 주괴 153,600 · 숯 51,200 · 강철 153,600). 10-01 정정: 다중제작을 빼먹어 목표가 9배(691만 · 1,106만 · 461만)로 적혀 있었다. <b>제련 시간</b>(10-03, 지난 세이브의 용광로 기록으로 실측): 1회 = 기본 초(숯 75 · 철 주괴 360 · 강철 900) ÷ 용광로 속도. 속도 = 다이아 ×3 × (1 + 사냥꾼 0.05/렙 + 엔지니어 0.06/렙 + 2막 용광로 제물 0.1/렙 + 카드·특성). 10-03 속도 ×14.9 → 강철 1회 60.5초 · 철 주괴 24.2초 · 숯 5.0초. <b>1명분 강철 38,400회 = 27일</b>(철 주괴 11일 · 숯 0.7일 별도), 사냥꾼 용광로 속도 25 + 제물 20 이면 강철 45초(20일)</td></tr>
+<tr class="no has-why"><td><span class="num">4</span><b>인피니트 I 방어구 — 나머지 재료 (4명분)</b></td><td>풀잎 돌 I 576,000 · 게의 곡괭이·용의 뿔·죽음의 꽃 각 8,000 · 결정화된 파란 물질 240</td><td>풀잎 돌 I 65,339/576,000 · 게의 곡괭이 119/8,000 · 용의 뿔 78/8,000 · 죽음의 꽃 230/8,000 · 결정화된 파란 물질 28/240</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">1명분 = ÷4(풀잎 돌 144,000 · 보스 재료 각 2,000 · 파란 물질 60). 풀잎 돌 = 1막 하드 몹 5%. <b>보스 재료는 부위 1,000 + 풀 핵 1,000</b> — 풀 핵(투구 재료)은 드랍이 아니라 게의 곡괭이 · 용의 뿔 · 죽음의 꽃 각 1,000 으로 만든다(가진 풀 핵 1개 = 각 1,000 으로 셈). 보스 재료 = 1막 하드 보스 상자 1회 100개(게의 곡괭이 = 게 · 용의 뿔 = 이르사이니르 · 죽음의 꽃 = 전령), 상자는 <b>초원 열쇠 I</b>(1막 하드 몹 1/50,000, 실측 하루 2~4개)로 연다 → 4명분 상자 240회. 파란 물질 = 3막 상점에서만, 하루 3개 + 3막 상인 재고 렙당 1. 10-03 정정: 각 4,000 · "풀 핵 = 하드 보스 드랍"은 틀린 값이었다</td></tr>
 </table>
-<p class="chksum">남은 것 <b>5줄</b> <small>· 10-03 14:40 세이브 기준 · ✘ 줄만 하면 된다</small></p>
-<!-- /CHK:s1 -->
-</section>
-
-<!-- ===================== 2단계 ===================== -->
-<section class="tab" id="s2">
-<h2>2단계 — 4캐릭 1막 하드</h2>
-<p>부캐가 3막 도시에 닿으면 시작. 1번 하드 사냥 · 2·3번 하드 채집 · 4번 2막 노말 제물 재료.</p>
-<!-- CHK:s2 -->
-<table class="chk">
-<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th><th>어디서 · 왜</th></tr>
-<tr class="ok"><td><b>길 · 역할</b></td><td>1번 1막 하드 사냥 · 2·3번 1막 하드 채집 · 4번 2막 노말</td><td>1번 하드 ON · 2번 하드 ON · 3번 하드 ON</td><td class="m">✔</td><td><small>1번 = 사냥꾼 재료 구역(5 식물 · 3 조약돌 · 6 늑대). 2·3번 = 철 광맥 · 물푸레 · 파이어우드(강철 주괴). 4번 = 투구(2.2) · 눈사람 · 드라우그(2.12) · 라타토스크 · 얼음멧돼지(제물 재료)</small></td></tr>
-<tr class="no"><td><b>타임라인</b></td><td>방어 ×1.10 (243) → 공격 ×1.10 (256) → 방어 ×1.10 (877) → HP ×1.10 (2,331) → 공격 ×1.10 (4,763)</td><td>방어 ✔ · 공격 ✔ · 방어 2 ✔ · HP — · 공격 2 — · 은행 576 IP</td><td class="m">✘</td><td><small>괄호 = 그 칸 IP. 방어 243 = 5분에 1 IP 로 약 20시간(다이아 타임라인 엔진 속도 1렙이면 절반). 은행이 다음 칸 값을 넘으면 초기화 → 구매. XP·금화 가지는 뒤로</small></td></tr>
-<tr class="ok"><td><b>다이아 (모래시계)</b></td><td>타임라인 엔진 속도 4 → 발전기 속도 4</td><td>타임라인 엔진 속도 4 · 발전기 속도 4</td><td class="m">✔</td><td><small>발전기 속도 2 · 3 · 4렙 = 다이아 350 · 500 · 650(파일 가격). 모래 발전기 전체 속도 ×2 → ×5. 2단계에서 다이아로 살 건 이것뿐</small></td></tr>
-<tr class="no"><td><b>사냥꾼</b></td><td>전 노드 25</td><td>위력 26 · 방어 25 · 힘 28 · 나머지 최저 21/25</td><td class="m">✘</td><td><small>유저 목표(10-01 "전 슬롯 25"). 20→25 = 노드당 약 437,000개(화면 곡선 ×2.89) — 1번 하드 약 3,120/h. 3개 30은 4단계 1막 악몽(×64). 용광로 속도는 13 유지</small></td></tr>
-<tr class="no"><td><b>제물</b></td><td>공격 17 · 물방 15 · 드랍 10 · 채광력 15 · 벌목력 15 · 치피 10 · 제련 10</td><td>공격 16/17 · 물방 12/15 · 드랍 11 · 채광력 10/15 · 벌목력 10/15 · 치피 10 · 제련 9/10</td><td class="m">✘</td><td><small>4번이 2막 노말에서 캔다. 비용은 참고 탭 제물 표(파일 곡선 자동). 16 이상은 4단계 2막 하드(×16). 금화 제물은 여기서 안 올린다 — 노란 물질이 토륨 무기에 먼저 들어가서 3단계 줄로 옮김(10-02)</small></td></tr>
-<tr class="ok"><td><b>엔지니어 속도</b></td><td>룬 설계도 ×7.7 · 설계도 ×7.2 유지</td><td>설계도 ×8.9 (485초) · 룬 설계도 ×9.0 (600초)</td><td class="m">✔</td><td><small>룬 설계도 +4 = 재료 24(창촉 1,000) + 나무 6~8(강철나무 3,200 · 6,400 · 10,000, 2막 벌목). 아이디어는 안 올린다(누락 검사 OK)</small></td></tr>
-<tr class="no"><td><b>엔지니어 노드</b></td><td>룬 설계도: 더 많은 재료 II 10 → 소박한 제물 5 → 고급 열쇠고리 5 · 설계도: 세금 환급 II 5 → 기본 열쇠고리 5 → 1막 상인 재고 3</td><td>더 많은 재료 II 2/10 · 소박한 제물 4/5 · 고급 열쇠고리 0/5 · 세금 환급 II 4/5 · 기본 열쇠고리 0/5 · 1막 상인 재고 1/3</td><td class="m">✘</td><td><small>태양 슬롯 OFF 동안 룬 설계도 약 48/h · 설계도 약 86/h</small></td></tr>
-<tr class="no"><td><b>엔지니어 태양</b></td><td>단계 끝에 ON → 4성 카드 1</td><td>4성 카드 0/1</td><td class="m">✘</td><td><small>켜는 때 = 위 룬 설계도·설계도 노드를 다 산 뒤. 켜면 태양 슬롯이 룬 설계도·설계도 생산을 전부 먹어 재고가 안 쌓인다(룬 설계도를 ×9.0까지 올려도 먹는 양과 같아질 뿐). 태양 400.보스 카드 4성(전령·이르사이니르 360장 · 게·요툰·매바스·매머드 600장)은 이 노드 뒤. 켜 두면 3단계 노드로 이어진다</small></td></tr>
-<tr class="no"><td><b>보스 · 카드</b></td><td>1막 하드 보스 3종 각 1회 · 1막 어려움 1 · 카드: 전령 24 · 매바스 48 · 게 48 · 요툰 100(3성) · 매머드 48 · 이르사이니르 60(3성)</td><td>하드 전령 2 · 하드 게 1 · 하드 이르사이니르 1 · 1막 어려움 48 · 전령 24 · 매바스 49 · 게 32/48 · 요툰 58/100 · 매머드 12/48 · 이르사이니르 60</td><td class="m">✘</td><td><small>하드 보스 3종은 1번이 열쇠 없이(각 1회 = 2막 하드·1막 악몽 조건). 카드는 노말 보스 상자 50%(파일) → 1장 ≈ 열쇠 2개, 열쇠 하루 5 · 상한 30. <b>열쇠 쓰는 순서</b>: 전령 24(5장) → 매바스 12(11장) → 매바스 48 → 게 48 → 요툰 100 → 매머드 48. 단계당 보상(파일): 전령 전투 XP +6% · 매바스 오프라인 +2%p · 게 채광 오프라인 +2%p · 요툰 드랍 +5 · 매머드 치확 +3%p · 이르사이니르 전투 오프라인 +2%p. 이 단계 몫 약 166장 ≈ 열쇠 330개 ≈ 66일. 나머지 3성은 3단계, 4성은 4단계(태양 노드 뒤)</small></td></tr>
-<tr class="no"><td><b>인피니트 I 방어구 — 강철 몫 원재료 (4명분)</b></td><td>철광석 768,000 · 물푸레 1,228,800 · 파이어우드 512,000</td><td>철광석 251,496/768,000 · 물푸레 394,930/1,228,800 · 파이어우드 56,391/512,000</td><td class="m">✘</td><td><small>= 강철 주괴 460,800(1명분 115,200 × 4). 1번도 인피니트 II 재료로 I 세트가 필요해서 4명분. 지금 값 = 창고 원재료 + 가진 강철·철 주괴·숯을 원재료로 되돌린 것. 레시피(파일): 강철 1 = 철 주괴 3 + 숯 1 · 철 주괴 1 = 철광석 5 + 물푸레 8 · 숯 1 = 파이어우드 10. <b>다중제작 4렙이라 제련 1회에 3개</b>가 나온다 → 강철 1개 = 철광석 1.67 · 물푸레 2.67 · 파이어우드 1.11. 제련 횟수 = 4명분 약 36만 회(철 주괴 153,600 · 숯 51,200 · 강철 153,600). 10-01 정정: 다중제작을 빼먹어 목표가 9배(691만 · 1,106만 · 461만)로 적혀 있었다. <b>제련 시간</b>(10-03, 지난 세이브의 용광로 기록으로 실측): 1회 = 기본 초(숯 75 · 철 주괴 360 · 강철 900) ÷ 용광로 속도. 속도 = 다이아 ×3 × (1 + 사냥꾼 0.05/렙 + 엔지니어 0.06/렙 + 2막 용광로 제물 0.1/렙 + 카드·특성). 10-03 속도 ×14.9 → 강철 1회 60.5초 · 철 주괴 24.2초 · 숯 5.0초. <b>1명분 강철 38,400회 = 27일</b>(철 주괴 11일 · 숯 0.7일 별도), 사냥꾼 용광로 속도 25 + 제물 20 이면 강철 45초(20일)</small></td></tr>
-<tr class="no"><td><b>인피니트 I 방어구 — 나머지 재료 (4명분)</b></td><td>풀잎 돌 I 576,000 · 게의 곡괭이·용의 뿔·죽음의 꽃 각 8,000 · 결정화된 파란 물질 240</td><td>풀잎 돌 I 65,339/576,000 · 게의 곡괭이 119/8,000 · 용의 뿔 78/8,000 · 죽음의 꽃 230/8,000 · 결정화된 파란 물질 28/240</td><td class="m">✘</td><td><small>1명분 = ÷4(풀잎 돌 144,000 · 보스 재료 각 2,000 · 파란 물질 60). 풀잎 돌 = 1막 하드 몹 5%. <b>보스 재료는 부위 1,000 + 풀 핵 1,000</b> — 풀 핵(투구 재료)은 드랍이 아니라 게의 곡괭이 · 용의 뿔 · 죽음의 꽃 각 1,000 으로 만든다(가진 풀 핵 1개 = 각 1,000 으로 셈). 보스 재료 = 1막 하드 보스 상자 1회 100개(게의 곡괭이 = 게 · 용의 뿔 = 이르사이니르 · 죽음의 꽃 = 전령), 상자는 <b>초원 열쇠 I</b>(1막 하드 몹 1/50,000, 실측 하루 2~4개)로 연다 → 4명분 상자 240회. 파란 물질 = 3막 상점에서만, 하루 3개 + 3막 상인 재고 렙당 1. 10-03 정정: 각 4,000 · "풀 핵 = 하드 보스 드랍"은 틀린 값이었다</small></td></tr>
-<tr class=""><td><b>다이아 (나머지)</b></td><td>안 산다 — 큐리오 인벤 · 용광로 용량</td><td>남는 다이아는 3단계 룬 소켓용으로 모은다</td><td class="m"></td><td><small>큐리오 인벤(350, +2칸) = 8칸이 꽉 차서 뽑기가 막힐 때만 — 스탯·코인은 장착 5개만 친다. 용광로 용량(300, 동시 작업 +1) = 2칸이 계속 밀려 원재료가 쌓일 때만. 10-01 정정: 둘 다 필요하다는 근거 없이 목표로 적혀 있었다</small></td></tr>
-<tr class="no"><td><b>룬</b></td><td>줄1 APEX+SIRC+WER</td><td>줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS</td><td class="m">✘</td><td><small>KI 3 → WER · WOM 3 → SIRC 3 → APEX. KI = 하드 몹 1/30,000. 치확 +10% · 치피 +60% · 드랍수량 +5</small></td></tr>
-<tr class=""><td><b>채집 특성</b></td><td>채광 열1 8_1까지 · 벌목 열1 8_1까지</td><td>포인트 = 직업 렙당 1</td><td class="m"></td><td><small>채광 6_1 치피 ×5 → 7_1 치명 ×4 → 8_1 속도 ×5 · 벌목 5_1 치피 ×5 → 6_1 속도 ×5 → 7_1 다중 ×5 → 8_1 치명 ×4</small></td></tr>
+<h3>4캐릭 지금</h3>
+<table>
+<tr><th>캐릭</th><th>어디서 뭘</th><th class="n">시간당</th><th>같이 쌓이는 것</th></tr>
+<tr><td>1번</td><td>1막 하드 12구역 · 사냥 <small>Mad Stump</small></td><td class="n">2,077</td><td>풀잎 돌 I · 초원 열쇠 I · KI 룬 · 1막 어려움 카드</td></tr>
+<tr><td>2번</td><td>1막 하드 4구역 · 채광 <small>copper_node_0</small></td><td class="n">1,570</td><td></td></tr>
+<tr><td>3번</td><td>1막 하드 5구역 · 사냥 <small>Rat</small></td><td class="n">1,613</td><td>풀잎 돌 I · 초원 열쇠 I · KI 룬 · 1막 어려움 카드</td></tr>
+<tr><td>4번</td><td>2막 노말 2구역 · 사냥 <small>Helmet</small></td><td class="n">2,013</td><td></td></tr>
 </table>
-<p class="chksum">남은 것 <b>9줄</b> <small>· 10-03 14:40 세이브 기준 · ✘ 줄만 하면 된다</small></p>
-<!-- /CHK:s2 -->
-</section>
-
-<!-- ===================== 3단계 ===================== -->
-<section class="tab" id="s3">
-<h2>3단계 — 인피니트 I 방어구 · 선스톤</h2>
-<p>1번은 선스톤, 부캐는 인피니트 I. 4단계 2막 하드를 위해 전투 80과 부캐 무기를 준비한다.</p>
-<!-- CHK:s3 -->
-<table class="chk">
-<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th><th>어디서 · 왜</th></tr>
-<tr class="no"><td><b>1번 장비</b></td><td>선스톤 도구 +4 · 선스톤 세트 +7 · 선스톤 장검 +10</td><td>토륨 장검 +9</td><td class="m">✘</td><td><small>선스톤 주괴 = 광석 480 + 팜페이스 56(야자 50 → 1), 다중제작 4렙이라 제련 1회에 3개씩 → 주괴 1개 = 광석 160 · 야자 약 311. 토륨 +10을 넘는 건 선스톤 장검 +4부터. 강화석 III(상점 3/일)부터 삼</small></td></tr>
-<tr class="no"><td><b>부캐 장비</b></td><td>인피니트 I 4부위 +4</td><td>2번 0/4 · 3번 0/4 · 4번 0/4</td><td class="m">✘</td><td><small>1세트씩 2단계 재료로. 강화는 초원 강화석 I</small></td></tr>
-<tr class="no"><td><b>부캐 무기</b></td><td>2·3·4번 토륨 무기 +7 (4단계 2막 하드 사냥 준비)</td><td>2번 0/7 · 3번 3/7 · 4번 3/7</td><td class="m">✘</td><td><small>원재료로 풀면(파일 레시피): 활 = 견과 35,000 · 노란 깃털 700 · 털가죽 1,050 / 지팡이 = 당근 15,000 · 빙정석 45 / 장검 = 투구 35,000 · 강철나무 7,000 · 강철 주괴 70 · 공통(각) = 노란 물질 140 · 북유럽 정수 60~75 · 토륨 주괴 98. 견과·당근·투구는 제물과 겹친다 — 제물 먼저, 무기 몫은 그 뒤 4번이 다시 캔다. 노란 물질은 금화 제물보다 무기 먼저. <b>순서 = 4번 장검 먼저</b>(10-02, 2·3번은 당분간 채광·벌목). 3번은 이미 토륨 지팡이, 남은 건 4번 장검 · 2번 활 = 노란 물질 280. 강화 성공률(파일) +1~3 100% · +4 70% · +5·+6 50% · +7 40%</small></td></tr>
-<tr class="no"><td><b>제물 (금화)</b></td><td>금화 10</td><td>금화 0/10</td><td class="m">✘</td><td><small>4캐릭 토륨 무기를 다 만든 다음, 2막 상점 노란 물질을 매일 사서 올린다(2단계에서 옮김, 10-02). 1→10 합 약 835개(45 × 1.11<sup>L</sup>) · 상점 하루 50 + 2막 상인 재고 렙당 1</small></td></tr>
-<tr class=""><td><b>길 · 역할</b></td><td>1번 3막 선스톤 광맥 ↔ 야자 · 2·3번 하드 채집 → 3막 채집 · 4번 2막 토륨</td><td>지금 스펙 탭 위치 줄</td><td class="m"></td><td><small></small></td></tr>
-<tr class="ok"><td><b>전투 레벨</b></td><td>전원 80</td><td>1번 88 · 2번 80 · 3번 80 · 4번 80</td><td class="m">✔</td><td><small>4단계 2막 하드 조건. <b>올리는 자리</b>(10-02, 화면 확인): 2·4번 = 2막 드라우그(2.12, 몹 기본 경험치 440,559 · 체력 83만 · 공격 1,200) · 3번(토륨 지팡이) = 1막 하드(기본 825,000 · 체력 300만 · 공격 1,400). 레벨 L→L+1 = 49 × 1.3<sup>L</sup>(78→79 378억 · 79→80 492억). 모래시계는 그 자리에 세워 사냥 상태일 때 쓴다 — 10-02 기준 2번 24시간 1 + 8시간 1 · 3번 24시간 1 · 4번 24시간 1 + 8시간 1 + 1시간 2. 2막 하드 몹 = 기본 경험치 10,395,000(1막 하드의 12.6배) · 체력 2,500만 · 공격 3,000</small></td></tr>
-<tr class=""><td><b>사냥꾼 · 제물</b></td><td>2단계 그대로</td><td>새 배수 없음</td><td class="m"></td><td><small></small></td></tr>
-<tr class="ok"><td><b>엔지니어 속도</b></td><td>룬 설계도 ×8.0</td><td>룬 설계도 ×9.0 (600초)</td><td class="m">✔</td><td><small>광석 6~8 = 토륨 3,200 · 6,400 · 10,000</small></td></tr>
-<tr class="no"><td><b>엔지니어 노드 (태양 ON)</b></td><td>더 많은 재료 III 10 · 3막 상인 재고 3 · 원격 사냥 1 · 원격 제물 1</td><td>더 많은 재료 III 0/10 · 3막 상인 재고 1/3 · 원격 사냥 0/1 · 원격 제물 0/1</td><td class="m">✘</td><td><small>3막 상인 재고 = 태양 설계도 120 · 240 · 480, 렙당 +1 → 파란 물질 하루 3 → 6(인피니트 I 4명분 240개 = 80일 → 40일). 파란 물질은 3막 상점에서만 나온다(파일: 드랍·제작 없음)</small></td></tr>
-<tr class="no"><td><b>보스 · 카드</b></td><td>1막 어려움 100 · 보스 카드 3성(지금 최대): 전령 60 · 매바스 100 · 게 100 · 매머드 100</td><td>1막 어려움 48/100 · 전령 24/60 · 매바스 49/100 · 게 32/100 · 매머드 12/100</td><td class="m">✘</td><td><small>3막 자이 할루드(HP 4억 · 공격 5,000)는 선스톤 장검 +10 뒤 — 안전 구석 즉시 이동, 지하 촉수 뿌리 먼저</small></td></tr>
-<tr class="no"><td><b>다이아</b></td><td>룬 소켓 6</td><td>룬 소켓 3/6</td><td class="m">✘</td><td><small>4 · 5 · 6번째 = 다이아 450 · 550 · 650(파일 가격)</small></td></tr>
-<tr class="no"><td><b>룬</b></td><td>TYR+SUR+VEX+LUM 추가</td><td>줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS</td><td class="m">✘</td><td><small>XP +50% · 공격 +300 · 오프라인 +5%. HAS(보스) · RYS(나무) T2~T4</small></td></tr>
-<tr class=""><td><b>채집 특성</b></td><td>열0: 채광 4_0 → 7_0 · 벌목 5_0 → 7_0</td><td>선스톤 200 · 야자 220이 2타 이상일 때만</td><td class="m"></td><td><small>채광 4_0 % ×3 → 5_0 숙련 3 → 6_0 +5 ×5 → 7_0 % ×4 · 벌목 5_0 숙련 3 → 6_0 +5 ×5 → 7_0 % ×4</small></td></tr>
-</table>
-<p class="chksum">남은 것 <b>8줄</b> <small>· 10-03 14:40 세이브 기준 · ✘ 줄만 하면 된다</small></p>
-<!-- /CHK:s3 -->
-</section>
-
-<!-- ===================== 4단계 ===================== -->
-<section class="tab" id="s4">
-<h2>4단계 — 2막 하드 · 인피니트 I 무기 · 인피니트 II</h2>
-<p>현재 콘텐츠 끝(3막 3번째 보스 미출시).</p>
-<!-- CHK:s4 -->
-<table class="chk">
-<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th><th>어디서 · 왜</th></tr>
-<tr class="no"><td><b>진입</b></td><td>전원 2막 하드</td><td>1번 하드 ON · 2번 노말 · 3번 노말 · 4번 노말</td><td class="m">✘</td><td><small>조건(캐릭터별) = 전투 80 + 1막 하드 보스 3종 각 1회 + 1막 어려움 카드 1장. 몹 HP 2,500만 · 공격 3,000</small></td></tr>
-<tr class=""><td><b>장비</b></td><td>인피니트 I 무기 → 인피니트 II 세트</td><td>무기 = 빙결석 I 300,000(2막 하드 1/20)</td><td class="m"></td><td><small>II 재료 = 선스톤 장비 + 인피니트 I + 초원석 II · 빙결석 II + 보스 재료 1,000(1막 악몽)</small></td></tr>
-<tr class="no"><td><b>사냥꾼</b></td><td>위력·방어·힘 30 · 나머지 25</td><td>위력 26/30 · 방어 25/30 · 힘 28/30 · 나머지 최저 21/25</td><td class="m">✘</td><td><small>1막 악몽(전투 90 + 하드 보스 3종 + 하드 카드) — 전투 드랍 ×64</small></td></tr>
-<tr class="no"><td><b>제물</b></td><td>공격·물방·드랍·채광력·벌목력·치피·제련·XP·치확·공속·금화 20 · 멀티루트 10</td><td>공격 16/20 · 물방 12/20 · 드랍 11/20 · 채광력 10/20 · 벌목력 10/20 · 치피 10/20 · 제련 9/20 · XP 11/20 · 치확 11/20 · 공속 12/20 · 금화 0/20 · 채광 멀티루트 5/10 · 벌목 멀티루트 5/10</td><td class="m">✘</td><td><small>2막 하드(×16). HP·마나는 안 올림. 그다음 2막 하드 카드로 상한 +4씩 → 32</small></td></tr>
-<tr class="ok"><td><b>엔지니어 속도</b></td><td>룬 설계도 ×9.0 (= 태양 슬롯 600초)</td><td>룬 설계도 ×9.0 (600초)</td><td class="m">✔</td><td><small>재료 25~ = 2막 재료 10,000씩(얼음 바늘 → 투구 → 얼음 유령 → 안경 → 견과 → 회중시계 → 당근 → 트롤 → 외알 → 손상 유리). 누락 검사가 부족을 띄우면 설계도만 +1</small></td></tr>
-<tr class="no"><td><b>엔지니어 노드</b></td><td>태양: 무한 II 방어구 · 무기 → 더 많은 사냥 III 5 · 마스터 열쇠고리 5 / 룬(OFF): 더 많은 제물 I 5 · 더 많은 사냥 II 5 / 설계도: 더 많은 사냥 I 5</td><td>무한 II 방어구 0/1 · 무한 II 무기 0/1 · 더 많은 사냥 III 0/5 · 마스터 열쇠고리 0/5 · 더 많은 제물 I 0/5 · 더 많은 사냥 II 0/5 · 더 많은 사냥 I 0/5</td><td class="m">✘</td><td><small>제물 I 은 제물 20 상한에 닿을 때, 사냥 II 는 사냥꾼 30 상한에 닿을 때</small></td></tr>
-<tr class=""><td><b>강화</b></td><td>인피니트 무기 마지막 티어만 +15 · 방어구 +7</td><td>+12부터 10% 고정</td><td class="m"></td><td><small></small></td></tr>
-<tr class="no"><td><b>다이아 · 룬</b></td><td>룬 소켓 9 · 6칸 WAR+YUR+GRO+MIN+TYR+FAL</td><td>줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS</td><td class="m">✘</td><td><small>공격 ×1.5 · 드랍수량 +20 · 오프라인 +10%. KI · NIL · FUS T4</small></td></tr>
-<tr class=""><td><b>보스</b></td><td>2막 악몽 = 전투 100 + 2막 하드 카드 · 보스 카드 4성: 이르사이니르·전령 360 · 요툰·매바스·게·매머드 600</td><td>3막 호루스 카드(카드 드랍 +16%) · 지니 카드(룬 드랍 +16%)</td><td class="m"></td><td><small>4성은 엔지니어 태양 "4성 카드" 노드(2단계 끝)를 연 뒤</small></td></tr>
-<tr class=""><td><b>채집 특성</b></td><td>나머지: 채광·벌목 8_0 숙련 5 · 채광 8_2 피해 5</td><td></td><td class="m"></td><td><small></small></td></tr>
-</table>
-<p class="chksum">남은 것 <b>5줄</b> <small>· 10-03 14:40 세이브 기준 · ✘ 줄만 하면 된다</small></p>
-<!-- /CHK:s4 -->
-</section>
-
-<!-- ===================== 운·매일 ===================== -->
-<section class="tab" id="luck">
-<h2>운·매일 — 목표 숫자가 없는 것</h2>
-<p>드랍 운으로 오거나 매일 반복하는 일. 단계와 상관없이 나오면 이렇게 한다.</p>
+<h3>기다리는 것</h3>
+<table>
+<tr><th>무엇</th><th>지금 / 목표</th><th>언제</th></tr>
+<tr><td><b>타임라인 다음 초기화</b></td><td>은행 + 보유 9,161 / 150,496</td><td>10-07(수) 새벽 1시쯤 — 그때 20k 미만 17칸 전부</td></tr>
+<tr><td><b>인피니트 I 1세트 — 풀잎 돌 I</b></td><td>65,339 / 144,000</td><td>3.5일 <small>1·3번 1막 하드 사냥(몹 5%)</small></td></tr>
+<tr><td><b>인피니트 I 1세트 — 파란 물질</b></td><td>28 / 60</td><td>8.0일 <small>3막 상점 하루 4개(기본 3 + 3막 상인 재고 렙)</small></td></tr>
+<tr><td><b>인피니트 I 1세트 — 강철 주괴 제련</b></td><td>206 / 115,200</td><td>27일 <small>용광로 강철 1회 60.5초에 3개 — 철 주괴 1회 24.2초 · 숯 5.0초는 따로</small></td></tr>
+<tr><td><b>초원 열쇠 I</b></td><td>10개</td><td>하드 보스 상자 1회 = 보스 재료 100개 <small>1세트에 상자 60회</small></td></tr>
+</table><p><small>10-03 14:03 세이브 기준. 주제별 탭의 타임라인 · 인피니트 I 재료에 전체 표.</small></p>
+<!-- /CHK:todo -->
 <h3>매일</h3>
 <ul>
 <li><b>상점(금화는 여기에만)</b>: 3막 파란 물질 전부(하루 3개 + 3막 상인 재고 렙당 1 — 지금 4개 · 인피니트 I 1명분 60 · 4명분 240) ·2막 강화석 II 3 · 2막 노란 물질 50 · 1막 강화석 I 3. 강화석 III 는 선스톤 전까지 안 삼. 엔지니어에 금화 0.</li>
 <li><b>운명의 나선 매일 2개</b>(다이아 상점 "일일 운명의 나선" 1 + 진귀품 팩 1, 10-01 구매) + 던전 코인 롤.</li>
-<li><b>무한의 모래시계</b>: 균열에 일꾼 파견(균열 탭은 모래시계 레벨이 더 올라야 생긴다 — 열리면 보라 균열 = IP 로) · 동전 던지기(쿨타임마다) · 모래시계 상점(주간) · 일일 퀘스트. 발전기는 모래로 "모두 구매". 타임라인 초기화·트리는 단계 표의 "타임라인" 줄.</li>
-<li><b>열쇠</b>: 보관 상한 30 — 25 넘기 전에 쓴다. 순서는 그 단계 표의 "보스 · 카드" 줄.</li>
+<li><b>무한의 모래시계</b>: 균열에 일꾼 파견(균열 탭은 모래시계 레벨이 더 올라야 생긴다 — 열리면 보라 균열 = IP 로) · 동전 던지기(쿨타임마다) · 모래시계 상점(주간) · 일일 퀘스트. 발전기는 모래로 "모두 구매". 타임라인 초기화는 <a href="#t-timeline">주제별 탭 타임라인</a>.</li>
+<li><b>열쇠</b>: 보관 상한 30 — 25 넘기 전에 쓴다. 순서는 <a href="#t-boss">주제별 탭 보스 · 카드 · 열쇠</a>.</li>
 </ul>
-<h3>길드 주간 — 목요일 오전 9:00 초기화</h3>
-<!-- CHK:guild -->
-<p><b>과제 인장 3,060 / 3,060</b> — 상한, 더 채워도 인장 0(길드 활동도만) · 과제는 채우면 레벨이 올라 목표가 커진다(채굴 Lv2 40,000 → Lv3 80,000). 인장이 상한이면 모래시계를 길드용으로 쓰지 않는다.</p>
-<table>
-<tr><th>과제</th><th class="n">지금 / 목표</th><th>남은 것 · 모래시계</th></tr>
-<tr><td>지원 <small>Lv5/5</small></td><td class="n">5 / 7</td><td>2 남음</td></tr>
-<tr><td>기부 <small>Lv3/4</small></td><td class="n">8 / 10</td><td>2 남음</td></tr>
-<tr><td>보스 처치 <small>Lv5/5</small></td><td class="n">27 / 30</td><td>3 남음</td></tr>
-<tr><td>출석 <small>Lv5/5</small></td><td class="n">6 / 7</td><td>1 남음</td></tr>
-<tr><td>나무 베기 <small>Lv3/5</small></td><td class="n">42,956 / 80,000</td><td>37,044 남음</td></tr>
-<tr><td>몬스터 처치 <small>Lv5/5</small></td><td class="n">333,811 / 100,000</td><td>✔</td></tr>
-<tr><td>광석 채굴 <small>Lv3/5</small></td><td class="n">40,294 / 80,000</td><td>39,706 남음</td></tr>
-</table><p><small>2026-09-29 20:05 기준(서버 목표는 길드 창을 열 때 받아 온다) · 초기화 목요일 오전 9:00 KST · 모래시계 1시간 = 그 캐릭터 시간당 채집 수만큼 카운트(09-29 실측) · 조작 중인 캐릭만 · 3막에선 못 씀</small></p>
-<!-- /CHK:guild -->
-<p><b>모래시계</b>(1·8·24시간)는 과제 인장이 상한 전일 때만 길드 채굴·벌목 부족분에 쓴다. 그 활동을 하는 캐릭터로 바꿔 놓고 쓴다. 남는 건 모아 둔다 — 오프라인 획득률이 오를수록 같은 모래시계가 더 준다.</p>
-<h3>파티 던전 이벤트 — 10월 7일까지 (던전 상인, 던전 코인)</h3>
-<ul>
-<li><b>장비 3개(당근 반지 700 · 토끼 발 700 · 그림자강철 장갑 600)는 안 산다.</b> 코인은 큐리오 뽑기(25)에 쓴다.</li>
-<li>이유: 반지·부적 칸은 <b>보스 드랍</b>으로 채운다 — 매머드 반지(매머드 10%) · 변칙 반지(3막 2번째 보스 10%) · 노르딕 부적(요툰 5%) · 보스 부적(1막 보스). 드랍 장신구는 중복이 계속 나와 5강까지 올라가고 5강이면 공격이 2.5배다(매머드 반지 30 → 75 · 노르딕 부적 40 → 100, 파일 강화 곡선). 상점 장신구는 1개뿐이라 0강에 머문다(당근 반지 공격 50 · 토끼 발 30). 장갑 칸은 인피니트 I → 선스톤 → 인피니트 II 로 바뀐다.</li>
-<li>상점 장신구에만 있는 건 오프라인(+3% · +6%)과 드랍 +10인데, 오프라인 100%는 이것 없이 된다(아래).</li>
-<li>오프라인 획득률(파일 + DB): 기본 50% + PRE 룬 6개 12% + PRE 조합 20% + 매바스 카드 단계당 2%(100장 = 8%) + 타임라인 오프라인 노드 합 10% + 큐리오 방어 계열 T3 3% = 103%. 여기에 활동별(전투·채광·벌목) 오프라인이 카드·큐리오·타임라인에서 따로 붙는다. 10-01 정정: "당근 반지 → 토끼 발 산다" → 셋 다 안 산다(장신구는 보스 드랍 + 강화).</li>
-</ul>
-<h3>큐리오 — 운</h3>
-<p>계정 공용, 진열대 5칸. 스탯과 코인은 <b>장착한 5개만</b> 친다. 목표 = 5계열(방어 · 채광 · 벌목 · 금화 · 전투)을 보라 이상으로 하나씩. 같은 계열 윗등급이 나오면 교체(분해 환급 80%). <b>전투 계열은 보라부터</b>라 그게 나올 때까지 5번째 칸은 임시 — 가진 것 중 제일 높은 등급을 낀다(이름만 다르면 같은 계열 두 개도 효과가 합쳐진다). 3개 중 고를 땐 참고 탭 표 순서. 낀 5개 레벨만 올린다 — 임시(초록 · 파랑)는 30에서 멈춤. 승천 파랑 T6 · 보라 · 주황 T9. 지금 낀 것은 <b>지금 스펙</b> 탭 큐리오 줄.</p>
-<h3>장신구 — 드랍</h3>
-<ul>
-<li>노르딕 부적(요툰 5%, 부적 칸 · 공격 40 · 마방 70 · 이속 +5% · 치확 +7%): 1번은 끼고 있다 → 다음 것은 부캐 순서로.</li>
-<li>매머드 반지(매머드 10%, 공격 30 · 마방 100 · 공속 +10% · 치피 +30%): 부캐.</li>
-<li>0강으로 낀다. 강화 = 같은 아이템 3개(장착 1 + 대상 1 + 재료 1), 실패하면 2개 소멸 — 여분을 올려 성공하면 갈아 낀다.</li>
-</ul>
-<h3>룬 드랍</h3>
-<p>같은 룬 3개씩 합친다. 목표 조합은 각 단계 표의 "룬" 줄.</p>
-<h3>펫 — 먹이</h3>
-<p>남는 펫(슬라임 · 박쥐)은 <b>1번의 호박머리</b>에게 먹인다. 먹일 수 있는 건 50레벨 펫뿐이고, 등급이 오르면 1레벨로 돌아가니 다시 50까지 올린 뒤 또 먹인다. 호박머리는 등급마다 드랍수량이 오른다(4등급 +12 → 5등급 +15 → 6등급 +18, 최대 6등급). 필요한 먹이 점수: 4 → 5등급 1,200 · 5 → 6등급 1,850. 먹이 한 마리 = 그 펫 등급 값(0등급 50 · 1등급 100 · 2등급 150 · 3등급 250) + 레벨당 1, 슬라임은 엔지니어 노드로 +30%(희귀 +50%). 무료 알은 16시간마다(슬라임 70% · 희귀 15% · 영웅 10% · 전설 5%). 2번의 모니(3등급)는 공격·방어·HP·경험치라 채광 캐릭엔 값이 작다 — 호박머리가 6등급이 된 뒤에. <small>게임 파일 PetConfig · 10-01</small></p>
+<p><small>줄을 누르면 설명이 펼쳐진다. 궁금한 건 <a href="#topic">주제별</a> 탭에서 주제 이름으로 찾는다.</small></p>
 </section>
 
-<!-- ===================== 참고 ===================== -->
-<section class="tab" id="ref">
-<h2>참고 — 단계와 무관한 표·설명 (숫자는 여기서 찾는다)</h2>
+<!-- ===================== 단계별 ===================== -->
+<section class="tab" id="stage">
+<p class="opt"><label><input type="checkbox" id="showdone"> 끝난 줄(✔)도 보기</label> · 줄을 누르면 "어디서 · 왜"가 펼쳐진다 · 한 단계의 ✘ 가 다 없어지면 다음 단계</p>
+<details class="stage" id="s1"><summary>1단계 — 부캐 3명 방어 1,300 → 매바스 → 3막 도시</summary><div>
+<p>부캐 셋은 방어를 올리고 길을 뚫는다. 1번은 1막 하드에서 2단계 재료를 미리 캔다.</p>
+<!-- CHK:s1 -->
+<p class="chksum">남은 것 <b>5줄</b> <small>· 10-03 14:03 세이브 기준 · 줄을 누르면 설명이 펼쳐진다</small></p>
+<table class="chk">
+<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th></tr>
+<tr class="ok has-why"><td><b>부캐 방어</b></td><td>2·3·4번 방어 1,300 이상</td><td>2번 1,841 · 3번 1,863 · 4번 1,863</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">매바스 = HP 5,000만 · 물리 공격 1,900 · 브레스(마법) 900 · 방어 0(파일). 커뮤니티 기준 "보스 잡으려면 방어 약 1,300". 올리는 법 = 물방 제물 12 + 방어구 +5 → 계산 1,325~1,363. 방어 계산 = tools/combat.py(체력 환산·카드 보너스 제외라 실제는 조금 더 높다)</td></tr>
+<tr class="ok has-why"><td><b>타임라인</b></td><td>초기화 1회 → 트리: 사암 샘플 1 → 모래 보너스 3 · 발전기 11 해금 4 (합 8 IP)</td><td>사암 샘플 ✔ · 모래 보너스 ✔ · 발전기 11 ✔ · 은행 576 IP</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">무한의 모래시계 레벨 3에서 열림. IP = 5분에 1(시간당 12). 다음 칸(방어 ×1.10 243 · 공격 ×1.10 256)은 2단계 줄. 트리 비용 = python tools/timeline.py</td></tr>
+<tr class="ok has-why"><td><b>다이아 (모래시계)</b></td><td>타임라인 엔진 속도 1 (IP 속도 +100%)</td><td>타임라인 엔진 속도 4</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">다이아는 여기 먼저(최대 4). 각성 증폭기·추가 균열 일꾼은 이미 삼. 발전기 속도(1/4)는 그다음</td></tr>
+<tr class="no has-why"><td><b>제물</b></td><td>물방 12 · 치피 10 · 제련 9 · 채광력 13</td><td>물방 12 · 치피 10 · 제련 9 · 채광력 10/13</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">전부 창고 재료로 된다(당근·손상 유리·외알 안경·견과). 레벨마다 재도 든다 — 재는 시간당 약 1,140(09-28 실측)</td></tr>
+<tr class="no has-why"><td><b>방어구</b></td><td>부캐 토륨 4부위 +5</td><td>2번 4/5 · 3번 4/5 · 4번 4/5</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">강화석 II, +5 성공률 70%. +6 이상은 안 한다(방어 훈련 25가 계정 전체에 준다)</td></tr>
+<tr class="ok has-why"><td><b>길</b></td><td>2·3·4번 매바스 잡고 3막 도시(3.0)</td><td>2번 ✔ · 3번 ✔ · 4번 ✔</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">방어 1,300 넘은 뒤. 몸에 붙어서 딜, 브레스는 좌우 끝으로, 페이즈 소환 몹 먼저. 입장에 열쇠 안 씀. 도착하면 그 캐릭터도 오벨리스크로 1막 하드를 켠다</td></tr>
+<tr class="has-why"><td><b>부캐 무기</b></td><td>안 만든다</td><td>철 무기 그대로</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">매바스 방어가 0이라 무기는 싸움 시간만 줄인다. 관문은 방어다. 2·3단계 부캐 일은 채집. 토륨 무기는 3단계 끝(4단계 2막 하드 사냥 준비)</td></tr>
+<tr class="ok has-why"><td><b>사냥꾼</b></td><td>전 노드 20</td><td>위력 26 · 방어 25 · 힘 28 · 나머지 최저 21</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">됐다. 1번은 1막 하드에서 2단계 목표(위력·방어·힘 25) 재료를 미리 캔다: 위력 = 5 식물 · 방어 = 3 조약돌 · 힘 = 6 늑대(노란 깃털도 여기서 — 토륨 활 700, 늑대 0.1%라 지금부터 쌓는다)</td></tr>
+<tr class="ok has-why"><td><b>엔지니어 속도</b></td><td>아이디어 ×12.0 · 설계도 ×7.2 · 룬 설계도 그대로</td><td>아이디어 ×13.7 (518초) · 설계도 ×8.9 (485초)</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">설계도 +3렙 = 재료 12~14(이상한 페이지 · D20 주사위 · 화염 정수 500씩, 창고에 있음) → 태양 1장치 600초 = 태양 슬롯과 같은 속도. 금화 0</td></tr>
+<tr class="no has-why"><td><b>엔지니어 태양</b></td><td>태양 슬롯 OFF</td><td>태양 슬롯 ON</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">룬 설계도·설계도를 모으는 중. 다시 켜는 건 2단계 끝(4성 카드)</td></tr>
+<tr class="no has-why"><td><b>엔지니어 노드</b></td><td>2막 상인 재고 3/3</td><td>2막 상인 재고 2/3</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">룬 설계도 1,600. 다음은 2단계 줄</td></tr>
+<tr class="no has-why"><td><b>강화</b></td><td>1번 토륨 장검 +10</td><td>토륨 장검 +9</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">강화석 II, +10 성공률 20%. 세이브상 장검 내구도 0 — 수리 먼저</td></tr>
+<tr class="has-why"><td><b>다이아 · 룬</b></td><td>다이아는 위 모래시계 줄에만 · 룬 장착은 그대로(줄0 PRE×6 · 줄1 GOR-MU-HAS) · 확정 합성만: KI 6 → WER · FUS 6 → YIT · NIL 6 → DOT</td><td>나머지 다이아 상품은 2단계부터</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">룬 판정 = python tools/runes.py. 3개 합성(50%·33%)과 확정(6·9개)은 기대 소모가 같아 확정만 쓴다. WER 은 2단계 APEX-SIRC-WER 재료</td></tr>
+<tr class="has-why"><td><b>채집 특성</b></td><td>채광 열1 5_1까지 · 벌목 열1 4_1까지</td><td>포인트 = 직업 렙당 1</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">채광 2_1 치명 ×3 → 3_1 속도 ×4 → 4_1 치피 ×4 → 5_1 다중 ×5 · 벌목 2_1 치피 ×4 → 3_1 속도 ×4 → 4_1 다중 ×2</td></tr>
+</table>
+<!-- /CHK:s1 -->
+</div></details>
+<details class="stage" id="s2" open><summary>2단계 — 4캐릭 1막 하드</summary><div>
+<p>1번 하드 사냥 · 2·3번 하드 채집 · 4번 2막 노말 제물 재료.</p>
+<!-- CHK:s2 -->
+<p class="chksum">남은 것 <b>9줄</b> <small>· 10-03 14:03 세이브 기준 · 줄을 누르면 설명이 펼쳐진다</small></p>
+<table class="chk">
+<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th></tr>
+<tr class="ok has-why"><td><b>길 · 역할</b></td><td>1번 1막 하드 사냥 · 2·3번 1막 하드 채집 · 4번 2막 노말</td><td>1번 하드 ON · 2번 하드 ON · 3번 하드 ON</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">1번 = 사냥꾼 재료 구역(5 식물 · 3 조약돌 · 6 늑대). 2·3번 = 철 광맥 · 물푸레 · 파이어우드(강철 주괴). 4번 = 투구(2.2) · 눈사람 · 드라우그(2.12) · 라타토스크 · 얼음멧돼지(제물 재료)</td></tr>
+<tr class="no has-why"><td><b>타임라인</b></td><td>20k 미만 칸 전부 — 은행 + 보유가 그 합이 되면 초기화 1번에</td><td>산 칸 31 · 남은 17칸 합 150,496 · 은행 + 보유 9,161</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">10-03 에 중간 초기화로 엔진 속도 +30% · 13번 발전기 해금을 샀다(안 하고 모으는 것보다 22시간 빠름). 지금은 방치, 합이 차면 한 번에 산다. 초기화 직후엔 모래로 엔진 출력 강화 4개(7/7 · 8/8 · 8/8 · 5/5)부터 다시 올린다 — 이게 IP 속도다. 칸 목록 · 예상 시각은 주제별 탭 "타임라인"</td></tr>
+<tr class="ok has-why"><td><b>다이아 (모래시계)</b></td><td>타임라인 엔진 속도 4 → 발전기 속도 4</td><td>타임라인 엔진 속도 4 · 발전기 속도 4</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">발전기 속도 2 · 3 · 4렙 = 다이아 350 · 500 · 650(파일 가격). 모래 발전기 전체 속도 ×2 → ×5. 2단계에서 다이아로 살 건 이것뿐</td></tr>
+<tr class="no has-why"><td><b>사냥꾼</b></td><td>전 노드 25</td><td>위력 26 · 방어 25 · 힘 28 · 나머지 최저 21/25</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">유저 목표(10-01 "전 슬롯 25"). 20→25 = 노드당 약 437,000개(화면 곡선 ×2.89) — 1번 하드 약 3,120/h. 3개 30은 4단계 1막 악몽(×64). 사냥꾼 용광로 속도는 렙당 +0.05(강철 제련이 빨라진다)</td></tr>
+<tr class="no has-why"><td><b>제물</b></td><td>공격 17 · 물방 15 · 드랍 10 · 채광력 15 · 벌목력 15 · 치피 10 · 제련 10</td><td>공격 16/17 · 물방 12/15 · 드랍 11 · 채광력 10/15 · 벌목력 10/15 · 치피 10 · 제련 9/10</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">4번이 2막 노말에서 캔다. 비용은 주제별 탭 "사냥꾼 · 제물" 표(파일 곡선 자동). 16 이상은 4단계 2막 하드(×16). 금화 제물은 여기서 안 올린다 — 노란 물질이 토륨 무기에 먼저 들어가서 3단계 줄로 옮김(10-02)</td></tr>
+<tr class="ok has-why"><td><b>엔지니어 속도</b></td><td>룬 설계도 ×7.7 · 설계도 ×7.2 유지</td><td>설계도 ×8.9 (485초) · 룬 설계도 ×9.0 (600초)</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">룬 설계도 +4 = 재료 24(창촉 1,000) + 나무 6~8(강철나무 3,200 · 6,400 · 10,000, 2막 벌목). 아이디어는 안 올린다(누락 검사 OK)</td></tr>
+<tr class="no has-why"><td><b>엔지니어 노드</b></td><td>룬 설계도: 더 많은 재료 II 10 → 소박한 제물 5 → 고급 열쇠고리 5 · 설계도: 세금 환급 II 5 → 기본 열쇠고리 5 → 1막 상인 재고 3</td><td>더 많은 재료 II 2/10 · 소박한 제물 4/5 · 고급 열쇠고리 0/5 · 세금 환급 II 4/5 · 기본 열쇠고리 0/5 · 1막 상인 재고 1/3</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">태양 슬롯 OFF 동안 룬 설계도 약 48/h · 설계도 약 86/h</td></tr>
+<tr class="no has-why"><td><b>엔지니어 태양</b></td><td>단계 끝에 ON → 4성 카드 1</td><td>4성 카드 0/1</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">켜는 때 = 위 룬 설계도·설계도 노드를 다 산 뒤. 켜면 태양 슬롯이 룬 설계도·설계도 생산을 전부 먹어 재고가 안 쌓인다(룬 설계도를 ×9.0까지 올려도 먹는 양과 같아질 뿐). 태양 400.보스 카드 4성(전령·이르사이니르 360장 · 게·요툰·매바스·매머드 600장)은 이 노드 뒤. 켜 두면 3단계 노드로 이어진다</td></tr>
+<tr class="no has-why"><td><b>보스 · 카드</b></td><td>1막 하드 보스 3종 각 1회 · 1막 어려움 1 · 카드: 전령 24 · 매바스 48 · 게 48 · 요툰 100(3성) · 매머드 48 · 이르사이니르 60(3성)</td><td>하드 전령 2 · 하드 게 1 · 하드 이르사이니르 1 · 1막 어려움 48 · 전령 24 · 매바스 49 · 게 32/48 · 요툰 58/100 · 매머드 12/48 · 이르사이니르 60</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">하드 보스 3종은 1번이 열쇠 없이(각 1회 = 2막 하드·1막 악몽 조건). 카드는 노말 보스 상자 50%(파일) → 1장 ≈ 열쇠 2개, 열쇠 하루 5 · 상한 30. <b>열쇠 쓰는 순서</b>: 전령 24(5장) → 매바스 12(11장) → 매바스 48 → 게 48 → 요툰 100 → 매머드 48. 단계당 보상(파일): 전령 전투 XP +6% · 매바스 오프라인 +2%p · 게 채광 오프라인 +2%p · 요툰 드랍 +5 · 매머드 치확 +3%p · 이르사이니르 전투 오프라인 +2%p. 이 단계 몫 약 166장 ≈ 열쇠 330개 ≈ 66일. 나머지 3성은 3단계, 4성은 4단계(태양 노드 뒤)</td></tr>
+<tr class="no has-why"><td><b>인피니트 I 방어구 — 강철 몫 원재료 (4명분)</b></td><td>철광석 768,000 · 물푸레 1,228,800 · 파이어우드 512,000</td><td>철광석 251,496/768,000 · 물푸레 394,930/1,228,800 · 파이어우드 56,391/512,000</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">= 강철 주괴 460,800(1명분 115,200 × 4). 1번도 인피니트 II 재료로 I 세트가 필요해서 4명분. 지금 값 = 창고 원재료 + 가진 강철·철 주괴·숯을 원재료로 되돌린 것. 레시피(파일): 강철 1 = 철 주괴 3 + 숯 1 · 철 주괴 1 = 철광석 5 + 물푸레 8 · 숯 1 = 파이어우드 10. <b>다중제작 4렙이라 제련 1회에 3개</b>가 나온다 → 강철 1개 = 철광석 1.67 · 물푸레 2.67 · 파이어우드 1.11. 제련 횟수 = 4명분 약 36만 회(철 주괴 153,600 · 숯 51,200 · 강철 153,600). 10-01 정정: 다중제작을 빼먹어 목표가 9배(691만 · 1,106만 · 461만)로 적혀 있었다. <b>제련 시간</b>(10-03, 지난 세이브의 용광로 기록으로 실측): 1회 = 기본 초(숯 75 · 철 주괴 360 · 강철 900) ÷ 용광로 속도. 속도 = 다이아 ×3 × (1 + 사냥꾼 0.05/렙 + 엔지니어 0.06/렙 + 2막 용광로 제물 0.1/렙 + 카드·특성). 10-03 속도 ×14.9 → 강철 1회 60.5초 · 철 주괴 24.2초 · 숯 5.0초. <b>1명분 강철 38,400회 = 27일</b>(철 주괴 11일 · 숯 0.7일 별도), 사냥꾼 용광로 속도 25 + 제물 20 이면 강철 45초(20일)</td></tr>
+<tr class="no has-why"><td><b>인피니트 I 방어구 — 나머지 재료 (4명분)</b></td><td>풀잎 돌 I 576,000 · 게의 곡괭이·용의 뿔·죽음의 꽃 각 8,000 · 결정화된 파란 물질 240</td><td>풀잎 돌 I 65,339/576,000 · 게의 곡괭이 119/8,000 · 용의 뿔 78/8,000 · 죽음의 꽃 230/8,000 · 결정화된 파란 물질 28/240</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">1명분 = ÷4(풀잎 돌 144,000 · 보스 재료 각 2,000 · 파란 물질 60). 풀잎 돌 = 1막 하드 몹 5%. <b>보스 재료는 부위 1,000 + 풀 핵 1,000</b> — 풀 핵(투구 재료)은 드랍이 아니라 게의 곡괭이 · 용의 뿔 · 죽음의 꽃 각 1,000 으로 만든다(가진 풀 핵 1개 = 각 1,000 으로 셈). 보스 재료 = 1막 하드 보스 상자 1회 100개(게의 곡괭이 = 게 · 용의 뿔 = 이르사이니르 · 죽음의 꽃 = 전령), 상자는 <b>초원 열쇠 I</b>(1막 하드 몹 1/50,000, 실측 하루 2~4개)로 연다 → 4명분 상자 240회. 파란 물질 = 3막 상점에서만, 하루 3개 + 3막 상인 재고 렙당 1. 10-03 정정: 각 4,000 · "풀 핵 = 하드 보스 드랍"은 틀린 값이었다</td></tr>
+<tr class="has-why"><td><b>다이아 (나머지)</b></td><td>안 산다 — 큐리오 인벤 · 용광로 용량</td><td>남는 다이아는 3단계 룬 소켓용으로 모은다</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">큐리오 인벤(350, +2칸) = 8칸이 꽉 차서 뽑기가 막힐 때만 — 스탯·코인은 장착 5개만 친다. 용광로 용량(300, 동시 작업 +1) = 2칸이 계속 밀려 원재료가 쌓일 때만. 10-01 정정: 둘 다 필요하다는 근거 없이 목표로 적혀 있었다</td></tr>
+<tr class="no has-why"><td><b>룬</b></td><td>줄1 APEX+SIRC+WER</td><td>줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">치확 +10% · 치피 +60% · 드랍수량 +5. 1단계 룬으로 WOM 60개(APEX 54 + SIRC 6) + KI 6개 — WOM 은 토륨·선스톤 광맥에서만(1/30,000, 2번이 토륨을 1타로 캘 때 하루 약 2.4개). <b>몇 주짜리 목표</b>라 이 줄은 다른 줄이 끝나도 남는다. 가진 수 · 드랍처는 주제별 탭 "룬"</td></tr>
+<tr class="has-why"><td><b>채집 특성</b></td><td>채광 열1 8_1까지 · 벌목 열1 8_1까지</td><td>포인트 = 직업 렙당 1</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">채광 6_1 치피 ×5 → 7_1 치명 ×4 → 8_1 속도 ×5 · 벌목 5_1 치피 ×5 → 6_1 속도 ×5 → 7_1 다중 ×5 → 8_1 치명 ×4</td></tr>
+</table>
+<!-- /CHK:s2 -->
+</div></details>
+<details class="stage" id="s3"><summary>3단계 — 인피니트 I 방어구 · 선스톤</summary><div>
+<p>1번은 선스톤, 부캐는 인피니트 I. 4단계 2막 하드를 위해 전투 80과 부캐 무기를 준비한다.</p>
+<!-- CHK:s3 -->
+<p class="chksum">남은 것 <b>8줄</b> <small>· 10-03 14:03 세이브 기준 · 줄을 누르면 설명이 펼쳐진다</small></p>
+<table class="chk">
+<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th></tr>
+<tr class="no has-why"><td><b>1번 장비</b></td><td>선스톤 도구 +4 · 선스톤 세트 +7 · 선스톤 장검 +10</td><td>토륨 장검 +9</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">선스톤 주괴 = 광석 480 + 팜페이스 56(야자 50 → 1), 다중제작 4렙이라 제련 1회에 3개씩 → 주괴 1개 = 광석 160 · 야자 약 311. 토륨 +10을 넘는 건 선스톤 장검 +4부터. 강화석 III(상점 3/일)부터 삼</td></tr>
+<tr class="no has-why"><td><b>부캐 장비</b></td><td>인피니트 I 4부위 +4</td><td>2번 0/4 · 3번 0/4 · 4번 0/4</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">1세트씩 2단계 재료로. 강화는 초원 강화석 I</td></tr>
+<tr class="no has-why"><td><b>부캐 무기</b></td><td>2·3·4번 토륨 무기 +7 (4단계 2막 하드 사냥 준비)</td><td>2번 0/7 · 3번 3/7 · 4번 3/7</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">원재료로 풀면(파일 레시피): 활 = 견과 35,000 · 노란 깃털 700 · 털가죽 1,050 / 지팡이 = 당근 15,000 · 빙정석 45 / 장검 = 투구 35,000 · 강철나무 7,000 · 강철 주괴 70 · 공통(각) = 노란 물질 140 · 북유럽 정수 60~75 · 토륨 주괴 98. 견과·당근·투구는 제물과 겹친다 — 제물 먼저, 무기 몫은 그 뒤 4번이 다시 캔다. 노란 물질은 금화 제물보다 무기 먼저. <b>순서 = 4번 장검 먼저</b>(10-02, 2·3번은 당분간 채광·벌목). 3번은 이미 토륨 지팡이, 남은 건 4번 장검 · 2번 활 = 노란 물질 280. 강화 성공률(파일) +1~3 100% · +4 70% · +5·+6 50% · +7 40%</td></tr>
+<tr class="no has-why"><td><b>제물 (금화)</b></td><td>금화 10</td><td>금화 0/10</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">4캐릭 토륨 무기를 다 만든 다음, 2막 상점 노란 물질을 매일 사서 올린다(2단계에서 옮김, 10-02). 1→10 합 약 835개(45 × 1.11<sup>L</sup>) · 상점 하루 50 + 2막 상인 재고 렙당 1</td></tr>
+<tr class=""><td><b>길 · 역할</b></td><td>1번 3막 선스톤 광맥 ↔ 야자 · 2·3번 하드 채집 → 3막 채집 · 4번 2막 토륨</td><td>지금 스펙 탭 위치 줄</td><td class="m"></td></tr>
+<tr class="ok has-why"><td><b>전투 레벨</b></td><td>전원 80</td><td>1번 88 · 2번 80 · 3번 80 · 4번 80</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">4단계 2막 하드 조건. <b>올리는 자리</b>(10-02, 화면 확인): 2·4번 = 2막 드라우그(2.12, 몹 기본 경험치 440,559 · 체력 83만 · 공격 1,200) · 3번(토륨 지팡이) = 1막 하드(기본 825,000 · 체력 300만 · 공격 1,400). 레벨 L→L+1 = 49 × 1.3<sup>L</sup>(78→79 378억 · 79→80 492억). 모래시계는 그 자리에 세워 사냥 상태일 때 쓴다 — 10-02 기준 2번 24시간 1 + 8시간 1 · 3번 24시간 1 · 4번 24시간 1 + 8시간 1 + 1시간 2. 2막 하드 몹 = 기본 경험치 10,395,000(1막 하드의 12.6배) · 체력 2,500만 · 공격 3,000</td></tr>
+<tr class=""><td><b>사냥꾼 · 제물</b></td><td>2단계 그대로</td><td>새 배수 없음</td><td class="m"></td></tr>
+<tr class="ok has-why"><td><b>엔지니어 속도</b></td><td>룬 설계도 ×8.0</td><td>룬 설계도 ×9.0 (600초)</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">광석 6~8 = 토륨 3,200 · 6,400 · 10,000</td></tr>
+<tr class="no has-why"><td><b>엔지니어 노드 (태양 ON)</b></td><td>더 많은 재료 III 10 · 3막 상인 재고 3 · 원격 사냥 1 · 원격 제물 1</td><td>더 많은 재료 III 0/10 · 3막 상인 재고 1/3 · 원격 사냥 0/1 · 원격 제물 0/1</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">3막 상인 재고 = 태양 설계도 120 · 240 · 480, 렙당 +1 → 파란 물질 하루 3 → 6(인피니트 I 4명분 240개 = 80일 → 40일). 파란 물질은 3막 상점에서만 나온다(파일: 드랍·제작 없음)</td></tr>
+<tr class="no has-why"><td><b>보스 · 카드</b></td><td>1막 어려움 100 · 보스 카드 3성(지금 최대): 전령 60 · 매바스 100 · 게 100 · 매머드 100</td><td>1막 어려움 48/100 · 전령 24/60 · 매바스 49/100 · 게 32/100 · 매머드 12/100</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">3막 자이 할루드(HP 4억 · 공격 5,000)는 선스톤 장검 +10 뒤 — 안전 구석 즉시 이동, 지하 촉수 뿌리 먼저</td></tr>
+<tr class="no has-why"><td><b>다이아</b></td><td>룬 소켓 6</td><td>룬 소켓 3/6</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">4 · 5 · 6번째 = 다이아 450 · 550 · 650(파일 가격)</td></tr>
+<tr class="no has-why"><td><b>룬</b></td><td>TYR+SUR+VEX+LUM 추가</td><td>줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">XP +50% · 공격 +300 · 오프라인 +5%. 4단계 룬 1개 = 1단계 룬 486개라 HAS 540 · RYS 492 가 든다(HAS = 매바스·요툰·매머드 상자 10% + 3막 3.5~ 몹, RYS = 강철나무·야자 1/30,000). <b>몇 달짜리 목표</b> — 따로 캐지 않고 쌓이는 대로. 4칸이라 룬 소켓 4번째(다이아 450)가 먼저 필요</td></tr>
+<tr class="has-why"><td><b>채집 특성</b></td><td>열0: 채광 4_0 → 7_0 · 벌목 5_0 → 7_0</td><td>선스톤 200 · 야자 220이 2타 이상일 때만</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">채광 4_0 % ×3 → 5_0 숙련 3 → 6_0 +5 ×5 → 7_0 % ×4 · 벌목 5_0 숙련 3 → 6_0 +5 ×5 → 7_0 % ×4</td></tr>
+</table>
+<!-- /CHK:s3 -->
+</div></details>
+<details class="stage" id="s4"><summary>4단계 — 2막 하드 · 인피니트 I 무기 · 인피니트 II</summary><div>
+<p>현재 콘텐츠 끝(3막 3번째 보스 미출시).</p>
+<!-- CHK:s4 -->
+<p class="chksum">남은 것 <b>5줄</b> <small>· 10-03 14:03 세이브 기준 · 줄을 누르면 설명이 펼쳐진다</small></p>
+<table class="chk">
+<tr><th>항목</th><th>이 단계 목표</th><th>지금</th><th></th></tr>
+<tr class="no has-why"><td><b>진입</b></td><td>전원 2막 하드</td><td>1번 하드 ON · 2번 노말 · 3번 노말 · 4번 노말</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">조건(캐릭터별) = 전투 80 + 1막 하드 보스 3종 각 1회 + 1막 어려움 카드 1장. 몹 HP 2,500만 · 공격 3,000</td></tr>
+<tr class="has-why"><td><b>장비</b></td><td>인피니트 I 무기 → 인피니트 II 세트</td><td>무기 = 빙결석 I 300,000(2막 하드 1/20)</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">II 재료 = 선스톤 장비 + 인피니트 I + 초원석 II · 빙결석 II + 보스 재료 1,000(1막 악몽)</td></tr>
+<tr class="no has-why"><td><b>사냥꾼</b></td><td>위력·방어·힘 30 · 나머지 25</td><td>위력 26/30 · 방어 25/30 · 힘 28/30 · 나머지 최저 21/25</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">1막 악몽(전투 90 + 하드 보스 3종 + 하드 카드) — 전투 드랍 ×64</td></tr>
+<tr class="no has-why"><td><b>제물</b></td><td>공격·물방·드랍·채광력·벌목력·치피·제련·XP·치확·공속·금화 20 · 멀티루트 10</td><td>공격 16/20 · 물방 12/20 · 드랍 11/20 · 채광력 10/20 · 벌목력 10/20 · 치피 10/20 · 제련 9/20 · XP 11/20 · 치확 11/20 · 공속 12/20 · 금화 0/20 · 채광 멀티루트 5/10 · 벌목 멀티루트 5/10</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">2막 하드(×16). HP·마나는 안 올림. 그다음 2막 하드 카드로 상한 +4씩 → 32</td></tr>
+<tr class="ok has-why"><td><b>엔지니어 속도</b></td><td>룬 설계도 ×9.0 (= 태양 슬롯 600초)</td><td>룬 설계도 ×9.0 (600초)</td><td class="m">✔</td></tr>
+<tr class="why"><td colspan="4">재료 25~ = 2막 재료 10,000씩(얼음 바늘 → 투구 → 얼음 유령 → 안경 → 견과 → 회중시계 → 당근 → 트롤 → 외알 → 손상 유리). 누락 검사가 부족을 띄우면 설계도만 +1</td></tr>
+<tr class="no has-why"><td><b>엔지니어 노드</b></td><td>태양: 무한 II 방어구 · 무기 → 더 많은 사냥 III 5 · 마스터 열쇠고리 5 / 룬(OFF): 더 많은 제물 I 5 · 더 많은 사냥 II 5 / 설계도: 더 많은 사냥 I 5</td><td>무한 II 방어구 0/1 · 무한 II 무기 0/1 · 더 많은 사냥 III 0/5 · 마스터 열쇠고리 0/5 · 더 많은 제물 I 0/5 · 더 많은 사냥 II 0/5 · 더 많은 사냥 I 0/5</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">제물 I 은 제물 20 상한에 닿을 때, 사냥 II 는 사냥꾼 30 상한에 닿을 때</td></tr>
+<tr class=""><td><b>강화</b></td><td>인피니트 무기 마지막 티어만 +15 · 방어구 +7</td><td>+12부터 10% 고정</td><td class="m"></td></tr>
+<tr class="no has-why"><td><b>다이아 · 룬</b></td><td>룬 소켓 9 · 6칸 WAR+YUR+GRO+MIN+TYR+FAL</td><td>줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS</td><td class="m">✘</td></tr>
+<tr class="why"><td colspan="4">공격 ×1.5 · 드랍수량 +20 · 오프라인 +10%. 4단계 룬 6개 = 1단계 룬 486개씩 6종. 가장 먼 목표</td></tr>
+<tr class="has-why"><td><b>보스</b></td><td>2막 악몽 = 전투 100 + 2막 하드 카드 · 보스 카드 4성: 이르사이니르·전령 360 · 요툰·매바스·게·매머드 600</td><td>3막 호루스 카드(카드 드랍 +16%) · 지니 카드(룬 드랍 +16%)</td><td class="m"></td></tr>
+<tr class="why"><td colspan="4">4성은 엔지니어 태양 "4성 카드" 노드(2단계 끝)를 연 뒤</td></tr>
+<tr class=""><td><b>채집 특성</b></td><td>나머지: 채광·벌목 8_0 숙련 5 · 채광 8_2 피해 5</td><td></td><td class="m"></td></tr>
+</table>
+<!-- /CHK:s4 -->
+</div></details>
+</section>
 
-<h3>사냥꾼 — 카드가 어디서 나오나</h3>
+<!-- ===================== 주제별 ===================== -->
+<section class="tab" id="topic">
+<div class="chips"><a href="#t-timeline">타임라인 · 모래시계</a><a href="#t-infinite">인피니트 I 재료</a><a href="#t-rune">룬 · 룬 소켓</a><a href="#t-boss">보스 · 카드 · 열쇠</a><a href="#t-hunt">사냥꾼 · 제물</a><a href="#t-gem">다이아 · 상점</a><a href="#t-curio">큐리오</a><a href="#t-eng">엔지니어</a><a href="#t-gather">채집 · 도구</a><a href="#t-hourglass">모래시계 아이템 · 레벨</a><a href="#t-acc">장신구 · 이벤트 상점</a><a href="#t-pet">펫</a><a href="#t-guild">길드 주간</a><a href="#t-end">난이도 · 게임의 끝</a></div>
+<section class="topic" id="t-timeline">
+<h2>타임라인 · 모래시계</h2>
+<div class="ans"><b>지금은 방치.</b> 은행 + 보유가 아래 "다음 초기화" 값이 되면 초기화 1번으로 20k 미만 칸을 전부 산다.</div>
+<!-- CHK:timeline -->
+<table class="kv">
+<tr><th>지금</th><td>초기화 4회 · 산 칸 31 · 보유 8,584 IP · 은행 577 IP · 시간당 1,689 IP</td></tr>
+<tr><th>다음 초기화</th><td><b>은행 + 보유가 150,496 가 되면</b>(지금 9,161 · 남은 141,335) — 지금 속도로 3.5일 (10-07(수) 새벽 1시쯤)</td></tr>
+<tr><th>그때 살 것</th><td>20k 미만 17칸 전부: 채광 오프라인 +1 <small>1,222</small> · 치피 +10 <small>2,109</small> · HP ×1.10 <small>2,331</small> · 공격 ×1.10 <small>4,763</small> · 마나 ×1.10 <small>5,264</small> · 오프라인 +1 <small>5,954</small> · 벌목력 ×1.10 <small>6,163</small> · 채광력 ×1.10 <small>6,372</small> · 방어 ×1.10 <small>10,261</small> · 금화 +10 <small>11,127</small> · 치확 +5 <small>11,342</small> · 전투 XP +20 <small>12,827</small> · 드랍수량 +3 <small>13,277</small> · 벌목 XP +10 <small>13,727</small> · 채광 XP +10 <small>14,177</small> · 수익 +300% <small>14,438</small> · 천구의(12번) 속도 +400% <small>15,142</small></td></tr>
+</table>
+<!-- /CHK:timeline -->
+<ul>
+<li><b>IP 속도 = 엔진 속도 × 엔진 출력.</b> 엔진 속도 = 타임라인의 "엔진 속도" 칸 + 각성 "타임라인 엔진 속도" + 다이아. 엔진 출력 = 모래 강화 묶음의 맨 끝 강화 4개. 모래 양 · 발전기 수익은 IP 에 안 들어간다(게임 코드).</li>
+<li><b>초기화하면 모래 · 발전기 · 모래 강화가 0</b>이 된다(산 칸 · 각성은 남는다). 직후 약 8시간은 모래로 엔진 출력 강화 4개(7/7 · 8/8 · 8/8 · 5/5)를 다시 올려야 최대 속도가 된다 — 다시 올릴 시간이 있을 때만 초기화한다.</li>
+<li><b>수입 칸(수익 +300% · 천구의 속도 +400% · 13번 해금)은 IP 를 거의 안 바꾼다.</b> 엔진 속도와 같이 어느 것을 사도 목표까지 80.6~81.3시간으로 같았다(10-03 시뮬레이션). 모래만 보면 13번이 없을 땐 천구의 속도(×5)가 수익(×4)보다 크고, 13번을 연 뒤엔 수익이 5배 크다.</li>
+<li><b>스탯 칸(공격 · 방어 · HP · 치피 · 치확)은 따로 노리지 않는다</b>(10-03 결정). 20k 미만을 한 번에 살 때 같이 산다.</li>
+<li><b>각성 "타임라인 엔진 속도"</b>: 1렙 +50%(각성 증폭기 2배 포함). 재료는 성문 건축 블록(3막 1보스 샤이 할루드의 문) → 프리즘 비콘(3막 2보스) 순환.</li>
+<li><b>각성 "모든 발전기 수입 I"</b>: 20렙이면 충분하다 — 100렙이어도 목표까지 1.4시간 차이. 재료는 태양의 정수 → 똥 공 → 선인장 → 캥거루 부메랑(3.1~3.4 몹) 순환, 21~24렙은 각 1,811개.</li>
+<li>다음 엔진 출력 묶음(8번째, IP +10%씩)은 7번째 묶음 3종을 50 · 25 · 60 까지 올려야 열린다. 지금 모래 수입으로는 다음 초기화 전에 안 열린다.</li>
+</ul>
+<p><small>칸 값 · 시뮬레이션 = <span class="mono">python tools/timeline.py</span> · <span class="mono">--sim</span></small></p>
+</section>
+<section class="topic" id="t-infinite">
+<h2>인피니트 I 재료</h2>
+<div class="ans"><b>방어구 4부위는 전부 강철 주괴</b>(토륨 주괴는 무기). 4세트 기준 제일 긴 줄은 강철 제련 → 보스 재료(초원 열쇠) → 파란 물질 순이다.</div>
+<!-- CHK:infinite -->
+<table>
+<tr><th>재료</th><th class="n">1세트</th><th class="n">4세트</th><th class="n">보유</th><th class="n">1세트까지</th><th class="n">4세트까지</th><th>어디서</th></tr>
+<tr><td><b>철광석</b></td><td class="n">192,000</td><td class="n">768,000</td><td class="n">251,496</td><td class="n">끝</td><td class="n">7.6일</td><td><small>2번 1막 하드 철 광맥</small></td></tr>
+<tr><td><b>물푸레</b></td><td class="n">307,200</td><td class="n">1,228,800</td><td class="n">394,930</td><td class="n">끝</td><td class="n">3.7일</td><td><small>3번 1막 하드</small></td></tr>
+<tr><td><b>파이어우드</b></td><td class="n">128,000</td><td class="n">512,000</td><td class="n">56,391</td><td class="n">22시간</td><td class="n">6.0일</td><td><small>3번 1막 하드</small></td></tr>
+<tr><td><b>풀잎 돌 I</b></td><td class="n">144,000</td><td class="n">576,000</td><td class="n">65,339</td><td class="n">3.5일</td><td class="n">22일</td><td><small>1·3번 1막 하드 사냥(몹 5%)</small></td></tr>
+<tr><td><b>게의 곡괭이</b></td><td class="n">2,000</td><td class="n">8,000</td><td class="n">119</td><td class="n">19일</td><td class="n">79일</td><td><small>하드 게 상자 1회 100개(초원 열쇠 I, 하루 약 3개를 셋이 나눠 씀)</small></td></tr>
+<tr><td><b>용의 뿔</b></td><td class="n">2,000</td><td class="n">8,000</td><td class="n">78</td><td class="n">19일</td><td class="n">79일</td><td><small>하드 이르사이니르 상자 1회 100개(초원 열쇠 I, 하루 약 3개를 셋이 나눠 씀)</small></td></tr>
+<tr><td><b>죽음의 꽃</b></td><td class="n">2,000</td><td class="n">8,000</td><td class="n">230</td><td class="n">18일</td><td class="n">78일</td><td><small>하드 전령 상자 1회 100개(초원 열쇠 I, 하루 약 3개를 셋이 나눠 씀)</small></td></tr>
+<tr><td><b>파란 물질</b></td><td class="n">60</td><td class="n">240</td><td class="n">28</td><td class="n">8.0일</td><td class="n">53일</td><td><small>3막 상점 하루 4개(기본 3 + 3막 상인 재고 렙)</small></td></tr>
+<tr><td><b>강철 주괴 제련</b></td><td class="n">115,200</td><td class="n">460,800</td><td class="n">206</td><td class="n">27일</td><td class="n">107일</td><td><small>용광로 강철 1회 60.5초에 3개 — 철 주괴 1회 24.2초 · 숯 5.0초는 따로</small></td></tr>
+</table>
+<p><small>보유 = 창고 + 가방 전부(강철 · 철 주괴 · 숯은 원재료로 되돌려 더함, 풀 핵 1개 = 보스 재료 각 1,000). 시간 = 10-03 세이브 이력으로 잰 속도 그대로일 때. 원재료 수치는 용광로 다중제작(제련 1회 3개)을 단계마다 반영한 값.</small></p>
+<!-- /CHK:infinite -->
+<table>
+<tr><th>부위</th><th class="n">강철 주괴</th><th class="n">풀잎 돌 I</th><th>보스 재료</th><th class="n">파란 물질</th></tr>
+<tr><td>투구</td><td class="n">57,600</td><td class="n">72,000</td><td>풀 핵 1 (= 게의 곡괭이 · 용의 뿔 · 죽음의 꽃 각 1,000 으로 제작)</td><td class="n">30</td></tr>
+<tr><td>흉갑</td><td class="n">19,200</td><td class="n">24,000</td><td>용의 뿔 1,000 (이르사이니르)</td><td class="n">10</td></tr>
+<tr><td>장갑</td><td class="n">19,200</td><td class="n">24,000</td><td>죽음의 꽃 1,000 (전령)</td><td class="n">10</td></tr>
+<tr><td>장화</td><td class="n">19,200</td><td class="n">24,000</td><td>게의 곡괭이 1,000 (게)</td><td class="n">10</td></tr>
+</table>
+<ul>
+<li>강철 1 = 철 주괴 3 + 숯 1 · 철 주괴 1 = 철광석 5 + 물푸레 8 · 숯 1 = 파이어우드 10. <b>다중제작 4렙이라 제련 1회에 3개</b>가 나온다(용광로 레시피 10종에만, 장비 · 풀 핵 제작엔 안 붙는다).</li>
+<li>보스 재료는 1막 하드 보스 상자에서 1회 100개. 상자는 <b>초원 열쇠 I</b>(1막 하드 몹 1/50,000)로 연다.</li>
+<li>파란 물질은 3막 상점에서만 나온다(하루 3개 + 3막 상인 재고 렙당 1).</li>
+<li>인피니트 I 무기(4단계) = 토륨 주괴 15,000 · 빙결석 I 300,000 · 3막 재료 450,000 · 풀 핵 2.</li>
+</ul>
+<details class="more"><summary>기다림의 정체 — 왜 오래 걸리나</summary><p>인피니트 I 4명분 기준, 긴 순서(10-03 세이브 이력 실측): <b>강철 제련 108일</b>(1명분 27일 — 강철 1회 60.5초, 용광로는 한 종류를 한 줄로만 돈다) · <b>초원 열쇠 I 240개</b>(하드 보스 상자 1회 = 보스 재료 100개, 열쇠는 1막 하드 몹에서 하루 2~4개 → 60~120일 — 하드 보스 "각 1회"(대량 상자는 10회) 조건은 처치만 세므로 열쇠 없이 됨) · <b>파란 물질 240</b>(3막 상점 하루 4개 = 60일) · 초원석 576,000(1막 하드 몹 5%, 1·3번 실측 시간당 950 = 22일 · 1번 혼자 650) · 강철 원재료(철광석 77만 2번 6~8일 · 물푸레 123만 3번 4일 · 파이어우드 51만 3번 6일 — 다중제작 3개 반영). 그래서 1·2단계에서 "빨리 되는 것"은 부캐 토륨 · 사냥꾼 3개 25 · 제물 공격 17·물방 15 · 싼 보스 카드 단계(전령 24 · 매바스 12) · 장신구이고, 인피니트·선스톤은 그 뒤에서 달 단위로 따라온다. 건너뛸 다음 티어는 없다 — 선스톤은 3막 채집(야자 약 110만 — 다중제작 반영), 인피니트는 하드 재료라 서로 안 막고 둘 다 길다</p></details>
+</section>
+<section class="topic" id="t-rune">
+<h2>룬 · 룬 소켓</h2>
+<div class="ans"><b>지금 바꿀 것 없음 · 소켓도 지금 안 산다.</b> 룬 때문에 자리를 옮기지 않고, 하던 사냥 · 채광에서 쌓이는 대로 둔다.</div>
+<!-- CHK:runes -->
+<p>장착: 줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS</p>
+<table>
+<tr><th>룬워드</th><th class="n">칸</th><th>효과</th><th>1단계 룬으로 가진 것 / 필요</th></tr>
+<tr><td><b>GOR MU HAS</b></td><td class="n">3</td><td>HP +200 · 전체 경험치 +10% · 포털 처치 +1</td><td>GOR 11/1 · MU 32/1 · HAS 25/1</td></tr>
+<tr><td><b>APEX SIRC WER</b></td><td class="n">3</td><td>치확 +10% · 치피 +60% · 드랍수량 +5</td><td><b>WOM 5/60</b> · KI 37/6</td></tr>
+<tr><td><b>DOT WIR YUR SKO</b></td><td class="n">4</td><td>채광력 +100 · 벌목력 +100 · 채광 멀티루트 +40 · 벌목 멀티루트 +40</td><td>NIL 92/60 · <b>KI 37/486</b> · <b>FUS 48/54</b></td></tr>
+<tr><td><b>TYR SUR VEX LUM</b></td><td class="n">4</td><td>전체 경험치 +50% · 공격 +300 · 오프라인 +5%</td><td><b>HAS 25/540</b> · <b>RYS 16/492</b></td></tr>
+<tr><td><b>FAL FAL TES WAR</b></td><td class="n">4</td><td>금화 +50% · HP +400 · 드랍수량 +10</td><td><b>MU 32/972</b> · <b>GOR 11/540</b></td></tr>
+<tr><td><b>WAR YUR GRO MIN TYR FAL</b></td><td class="n">6</td><td>오프라인 +10% · 공격 ×1.5 · 드랍수량 +20</td><td><b>GOR 11/486</b> · <b>KI 37/486</b> · <b>NIL 92/486</b> · <b>FUS 48/486</b> · <b>HAS 25/486</b> · <b>MU 32/486</b></td></tr>
+</table>
+<table>
+<tr><th>1단계 룬</th><th>스탯</th><th class="n">가진 것</th><th>어디서</th></tr>
+<tr><td><b>FUS</b></td><td>채광력</td><td class="n">48</td><td>눈사람(2막), 라타토스크(2막), 트롤(2막), 회중시계(2막) <small>1/30,000</small></td></tr>
+<tr><td><b>GOR</b></td><td>HP</td><td class="n">11</td><td>선보이(3.1), 선인장(3.3), 쇠똥구리(1막), 캥거루(3.4) <small>1/30,000</small></td></tr>
+<tr><td><b>HAS</b></td><td>전체 경험치</td><td class="n">25</td><td>3.9 몹, 날개 뱀(3.6), 딱정벌레 인간(3.8), 미라(3.10), 반디프(3.7), 지니(3.11), 페즈(3.5), 호루스(3.12) <small>1/30,000</small> · 매머드, 매바스, 요툰 <small>상자 10%</small></td></tr>
+<tr><td><b>KI</b></td><td>방어</td><td class="n">37</td><td>1막 악몽 전 몹, 1막 하드 전 몹 <small>1/30,000</small></td></tr>
+<tr><td><b>MU</b></td><td>금화</td><td class="n">32</td><td>드라우그(2막), 마트료시카(2막), 유리(2막), 펭귄(2막) <small>1/30,000</small> · 게, 이르사이니르, 전령 <small>상자 10%</small></td></tr>
+<tr><td><b>NIL</b></td><td>벌목력</td><td class="n">92</td><td>얼음 유령(2막), 얼음멧돼지(2막), 예티(2막), 투구투구(2막) <small>1/30,000</small></td></tr>
+<tr><td><b>RYS</b></td><td>공격</td><td class="n">16</td><td>강철나무, 야자수 <small>1/30,000</small></td></tr>
+<tr><td><b>WOM</b></td><td>치피</td><td class="n">5</td><td>선스톤 광맥, 토륨 광맥 <small>1/30,000</small></td></tr>
+</table>
+<!-- /CHK:runes -->
+<ul>
+<li>룬은 계정 공용(4캐릭이 같이 받는다). 줄 3개 × 6칸: 줄0 은 1~3칸 기본 + 4~6칸 다이아 소켓 1~3 · 줄1 은 1~3칸 전투 70 · 80 · 90 + 4~6칸 소켓 4~6(다이아 450 · 550 · 650) · 줄2 는 전투 120 · 140 · 160 + 소켓 7~9.</li>
+<li>합성은 확정만: 1 → 2단계 6개, 2 → 3 · 3 → 4단계 9개. <b>4단계 룬 1개 = 1단계 룬 486개</b>. 4칸 룬워드 3종은 전부 4단계 룬이 들어가서, 소켓 4번째를 지금 사도 끼울 게 없다.</li>
+<li>모이는 속도(10-03 세이브 이력 실측): KI 하루 8.9개(1 · 3번 1막 하드) · NIL 하루 3.1개(4번 투구투구) · WOM 하루 약 1개. 캐릭 1명이 한 종류를 하루 3개쯤.</li>
+<li>가까운 순서: APEX SIRC WER(WOM 55개 더 — 2번이 토륨을 1타로 캘 때 하루 2.4개, 약 23일) → DOT WIR YUR SKO(채집 룬워드, KI 449개 더 = 약 50일 + FUS 6). 나머지는 몇 달.</li>
+</ul>
+<p><small><span class="mono">python tools/runes.py</span></small></p>
+</section>
+<section class="topic" id="t-boss">
+<h2>보스 · 카드 · 열쇠</h2>
+<div class="ans"><b>열쇠 쓰는 순서</b>: 전령 24 → 매바스 12 → 매바스 48 → 게 48 → 요툰 100 → 매머드 48. 카드 1장 ≈ 열쇠 2개. 지금 장수는 단계별 탭 "보스 · 카드" 줄.</div>
+<p><b>보관 상한 30</b>(파일). 수입 = 일일 퀘스트 3 + Daily I·II 2 = 5/일(Daily III 사면 6). 25 넘기 전에 쓴다. 보스 카드 1장 ≈ 상자 2회(파일 50%) = 열쇠 2개 — 2단계 몫(전령 24 · 매바스 48 · 게 48 · 요툰 100 · 매머드 48) 약 166장 ≈ 열쇠 330개 ≈ 66일. <b>x5 버튼은 그 보스를 30회 처치해야 열린다</b>(파일). x5는 싸움 시간만 줄이고 열쇠당 보상은 같다.</p>
+<h3>카드가 어디서 나오나</h3>
 <table>
 <tr><th>카드 종류</th><th>어디서</th><th>어떻게 보이나</th></tr>
 <tr><td>몹 카드 65종 (여우·게·갑옷·이르사이니르·… 막별, 몹당 1종)</td><td>노말·하드 둘 다 — 몹 고유 드랍표는 난이도가 바뀌어도 그대로다(파일). 하드는 여기에 아래 4가지가 <b>추가</b>될 뿐. 그래서 하드에서 사냥꾼 재료가 나오듯 몹 카드도 나온다</td><td>카드 창의 1막·2막·3막 묶음</td></tr>
 <tr><td>난이도 카드 9종 ("1막 어려움 카드" 등)</td><td>하드 몹 전용 추가 드랍표: 초원석 5% · 초원 열쇠 1/50,000 · <b>1막 어려움 카드 1/30,000</b> · KI 룬 1/30,000</td><td>카드 창의 <b>"난이도 카드"</b> 묶음. 님이 본 "(어려움)"이 이것 — 1장부터 사냥꾼 상한 +4, 12·48·100·600장에 더</td></tr>
 </table>
-<p>따라서 1번이 하드 5구역에 서 있으면 식물 카드·1막 어려움 카드·사냥꾼 재료가 한꺼번에 쌓인다. 노말로 돌아가 카드를 캘 일은 없다. 지금 다음 단계 가까운 몹 카드: 1.10 갑옷 21/24 · 2.2 투구 45/48(둘 다 2성 문턱. 1막 몹 1·8·24·60·360장, 2막 몹 1·12·48·100·600장 = 0~4성).<br>
+<p>따라서 1번이 하드 5구역에 서 있으면 식물 카드·1막 어려움 카드·사냥꾼 재료가 한꺼번에 쌓인다. 노말로 돌아가 카드를 캘 일은 없다. 카드 단계(1막 몹 1·8·24·60·360장, 2막 몹 1·12·48·100·600장 = 0~4성).<br>
 하드에서 <b>보스</b>(이르사이니르 등)를 잡으면: 같은 보스 카드가 나온다(단 하드는 2%, 노말 상자는 50%. 이르사이니르 60장 = 3성 = 지금 최대, 4성은 360장이고 태양 "4성 카드" 노드 뒤) + 보스 재료 100개/회(노말 1개) + 대량 상자 조건 10회 카운트(2막 하드·악몽 조건은 각 1회). 대신 강화석 I은 안 주고 초원 강화석 I(인피니트용)을 준다.</p>
-
-
-<h3>제물 — 전체 비용표 (파일 곡선에서 자동 계산)</h3>
+<h3>샌드웜 = 3막 1보스 샤이 할루드의 문</h3>
+<table>
+<tr><th>나오는 것</th><th>할 일</th></tr>
+<tr><td>꼬리치기 — 문을 치면 5칸 옆에서 솟아 0.5초 뒤 내려친다(5초마다)</td><td>바닥 표시를 보고 빠진다</td></tr>
+<tr><td>잠수 — 30초마다. 몸통 마디 4개가 왼쪽으로 6칸 간격, 1.5초마다 솟는다. 맞으면 즉사</td><td>안전 구석(왼쪽 끝)으로 간다</td></tr>
+<tr><td>잠수가 끝나면 구덩이가 열리고 새끼 벌레 6마리(체력 800만씩)</td><td>구덩이로 내려가 뿌리를 친다 — 지상의 몸은 피해가 5%만 들어간다. 6마리를 다 잡으면 지하 단계 끝</td></tr>
+<tr><td>지상에 10초 넘게 있으면 벌칙 잠수(마디 6개)</td><td>새끼 벌레 단계엔 바로 내려간다</td></tr>
+<tr><td>침 — 맞을 때마다 중첩(15초), 중첩당 피해 +10%</td><td>높이 차가 2 넘으면 안 쏜다</td></tr>
+</table>
+<p><small>체력 4억 · 공격 5,000 · 드랍: 성문 건축 블록 100% · 카드 50% · 고체 연료 20% · 1시간 모래시계 10%. 게임 코드 + 커뮤니티 가이드 대조(10-03). 3막 2보스 = 체력 31.5억.</small></p>
+</section>
+<section class="topic" id="t-hunt">
+<h2>사냥꾼 · 제물</h2>
+<div class="ans"><b>사냥꾼 전 노드 25 → 제물.</b> 사냥꾼 최대 30 · 제물 최대 20. 둘 다 "지금 할 일" 1 · 2번이다.</div>
 <!-- CHK:sac-ref -->
 <table>
 <tr><th>제물 (레벨당)</th><th>재료</th><th class="n">지금</th><th class="n">2단계 목표</th><th class="n">지금 → 2단계</th><th class="n">보유</th><th class="n">2단계 → 20 (4단계)</th></tr>
@@ -240,39 +388,44 @@ table.chk td{vertical-align:top}table.chk tr.ok td{color:var(--ink-3)}table.chk 
 <tr><td>벌목 멀티루트 +1%p</td><td>강철나무 통나무</td><td class="n">5</td><td class="n">5</td><td class="n">0</td><td class="n">21,764</td><td class="n">310,561</td></tr>
 </table><p><small>레벨 L 로 올리는 재료 = 384.6 × 1.3<sup>L</sup>(파일 act-2-material-growth, 금화 제물만 45 × 1.11<sup>L</sup>). 레벨마다 재도 든다. 4단계 열은 2막 하드(전투 드랍 ×16)에서 캔다.</small></p>
 <!-- /CHK:sac-ref -->
-
-<h3>엔지니어 — 속도 식 · 비용 구조</h3>
-<p>파일 + 실측(09-27 세이브 8회 연속): 슬롯 속도 = 2(젬) × (1 + 0.2×금화렙 + 0.05×(재료+나무+광석 렙)). 태양 1장 = 아이디어 1,420 · 설계도 24 · 룬 10 → <b>배율이 3.59 : 2.18 : 2.73 : 1 이면 넷이 맞물린다</b>. 슬롯4는 올리지 않는다. <b>금화는 상점용이라 여기엔 0</b>. 비용은 <b>항목 순환</b>(렙마다 목록의 다음 재료 1종, 한 바퀴마다 다음 칸 100→200→…→6,400→약 1만). 지금 렙·살 것·막힌 재료는 <b>지금 스펙</b> 탭이 세이브에서 자동으로 띄운다.</p>
-
-<h3>엔지니어 — 노드 구매 순서 (재고가 차는 대로, 단계 무관)</h3>
-<p>룬 설계도·설계도 재고는 <b>슬롯4를 꺼야</b> 쌓인다(슬롯4가 룬 10·설계도 14를 사이클마다 먹음). <b>슬롯4 상태 = 지금 사려는 노드의 통화</b>: 태양이면 ON, 룬·설계도면 OFF. 단계별 배정은 각 탭 ⑥ — 1단계 태양 60 ON → OFF · 2단계 룬·설계도 OFF, 끝에 태양 ON · 3단계 ON · 4단계 통화 따라.</p>
-<p>노드 구매 순서(파일 비용 · 세이브 현재 렙). <b>아이디어</b>: 살 것 없음 — 채광 산업 40·조니 트리맨 40(무제한)은 그만, 병목 통화는 전부 생산에.</p>
+<ul>
+<li>사냥꾼 20 → 25 = 노드당 약 437,000개. 3개 30 은 4단계 1막 악몽(드랍 ×64)에서.</li>
+<li>제물 16 이상은 4단계 2막 하드(드랍 ×16)에서. 금화 제물은 4캐릭 토륨 무기를 다 만든 뒤(노란 물질이 겹친다).</li>
+<li>사냥꾼 용광로 속도 렙당 +0.05 · 2막 용광로 제물 렙당 +0.1 — 강철 제련이 빨라진다.</li>
+</ul>
+</section>
+<section class="topic" id="t-gem">
+<h2>다이아 · 상점</h2>
+<div class="ans"><b>지금 살 것 없음 — 모아 둔다.</b> 다음은 룬 소켓 4 · 5 · 6번째(450 · 550 · 650)인데, 4칸 룬워드 재료가 모였을 때 산다.</div>
+<p>산 것과 남은 다이아는 <a href="#now">지금 스펙</a> 탭. 발전기 속도 4/4 · 타임라인 엔진 속도 4/4 는 끝났다.<br>
+<b>조건이 생길 때만</b>: 큐리오 인벤(350, +2칸) = 8칸이 꽉 차서 뽑기가 막힐 때 · 용광로 용량(300, 여러 종류 동시 제련 +1).<br>
+<b>안 삼</b>: 운명의 나선 낱개(80 — 매일 무료분으로 천장까지 간다) · 헌터 비용 절감(첫 구매 1회만 할인) · 창고 · 가방 · 룬 인벤 · 연료 효율 · 기본 재 · 큐리오 코인 상한 · 스킨.<br>
+<b>금화는 상점용</b>: 매일 3막 파란 물질 전부 · 2막 강화석 II · 2막 노란 물질 · 1막 강화석 I. 엔지니어에는 금화를 안 쓴다.</p>
 <table>
-<tr><th>통화</th><th>순서</th><th>노드 (지금)</th><th>비용</th><th>얻는 것</th></tr>
-<tr><td rowspan="5">설계도</td><td>1</td><td><b>사냥꾼 세금 환급 II</b> (0/5)</td><td>200·400·800·1,600·3,200</td><td>+5%/렙 확률로 사냥꾼 비용 50% 환급. I(5/5)와 합쳐 50% → 사냥꾼 비용 기대치 −25%</td></tr>
-<tr><td>2</td><td>1막 상인 재고 (1/3)</td><td>800·1,600</td><td>강화석 I 하루 +1씩</td></tr>
-<tr><td>3</td><td>기본 열쇠고리 (0/5)</td><td>200·300·450·675·1,013</td><td>열쇠 보관 +1씩</td></tr>
-<tr><td>4</td><td>더 많은 사냥 I (0/5)</td><td>800·1,200·1,800·2,700·4,050</td><td>사냥꾼 상한 +1씩 — 30에 닿을 때</td></tr>
-<tr><td>5</td><td>도전과제 헌터 (5/10)</td><td>829·995·1,194·1,433·1,720</td><td>업적당 전리품 수량. 안 삼: 전투 경험치·제련 도안(무제한)</td></tr>
-<tr><td rowspan="6">룬 설계도</td><td>1</td><td><b>더 많은 재료 II</b> (0/10)</td><td>400·480·576·691·829·995·1,194·1,433·1,720·2,064</td><td>전투 멀티루트 +1/렙 — 사냥꾼 재료 수량</td></tr>
-<tr><td>2</td><td>2막 상인 재고 (2/3)</td><td>1,600</td><td>강화석 II 하루 +1</td></tr>
-<tr><td>3</td><td>소박한 제물 (0/5)</td><td>200·400·800·1,600·3,200</td><td>제물 비용 50% 환급 확률 +5%/렙</td></tr>
-<tr><td>4</td><td>고급 열쇠고리 (0/5)</td><td>200·300·450·675·1,013</td><td>열쇠 보관</td></tr>
-<tr><td>5</td><td>더 많은 제물 I (0/5)</td><td>1,000·1,500·2,250·3,375·5,063</td><td>제물 상한 +1씩 — 20에 닿을 때</td></tr>
-<tr><td>6</td><td>더 많은 사냥 II (0/5)</td><td>1,000·1,500·2,250·3,375·5,063</td><td>뒤: 원격 제작 5,000 · 룬 스택 2,000·5,000·10,000 · 빠른 부화 400×2ⁿ · 슬라임 먹이 400×4. 안 삼: 펫 훈련·모닥불 프로토타이핑(무제한)</td></tr>
-<tr><td rowspan="6">태양 두루마리</td><td>1</td><td><b>일일 활동 강화기 III</b> (0/1)</td><td>60</td><td>열쇠 +1/일</td></tr>
-<tr><td>2</td><td>3막 상인 재고 (0/3)</td><td>120·240·480</td><td>3막 상점 재고</td></tr>
-<tr><td>3</td><td>더 많은 재료 III (0/10)</td><td>120·144·173·207·249·299·358·430·516·619</td><td>멀티루트 +1/렙</td></tr>
-<tr><td>4</td><td>4성 카드 (0/1)</td><td>400</td><td>카드 4성 해금</td></tr>
-<tr><td>5</td><td>더 많은 사냥 III (0/5) · 마스터 열쇠고리 (0/5)</td><td>300·450·675·1,012·1,519 · 60·90·135·203·304</td><td>사냥꾼 상한 · 열쇠 보관</td></tr>
-<tr><td>6</td><td>원격 사냥 · 원격 제물 · 이중 치명타 · 무한 II 방어구·무기</td><td>600 · 600 · 120 · 400·600</td><td>창고 재료로 강화 · 치확 100% 넘을 때 · 4단계. 안 삼: 골드 연구(무제한)</td></tr>
+<tr><th>품목</th><th class="n">최대</th><th>렙별 다이아</th></tr>
+<tr><td>발전기 속도</td><td class="n">4</td><td>200 · 350 · 500 · 650</td></tr>
+<tr><td>타임라인 엔진 속도</td><td class="n">4</td><td>250 · 400 · 550 · 700</td></tr>
+<tr><td>각성 증폭기 · 추가 균열 일꾼</td><td class="n">1</td><td>500 · 700</td></tr>
+<tr><td>일일 운명의 나선 · 나선 낱개</td><td class="n">1</td><td>900 · 낱개 80</td></tr>
+<tr><td>큐리오 인벤 (렙당 2칸)</td><td class="n">12</td><td>300 · 350 · 400 … (+50)</td></tr>
+<tr><td>큐리오 코인 한도 (렙당 +500)</td><td class="n">6</td><td>450 · 550 · 650 … (+100)</td></tr>
+<tr><td>룬 소켓</td><td class="n">9</td><td>150 · 250 · 350 · 450 · 550 · 650 · 800 · 950 · 1,100</td></tr>
+<tr><td>PRE 룬</td><td class="n">6</td><td>150 · 250 · 350 · 500 · 700 · 900</td></tr>
+<tr><td>룬 인벤 (렙당 4칸)</td><td class="n">9</td><td>200 · 250 · 300 … (+50)</td></tr>
+<tr><td>용광로 속도</td><td class="n">4</td><td>150 · 200 · 250 · 300</td></tr>
+<tr><td>용광로 다중제작 · 엔지니어 슬롯</td><td class="n">4</td><td>150 · 250 · 350 · 500</td></tr>
+<tr><td>용광로 용량</td><td class="n">2</td><td>300 · 450</td></tr>
+<tr><td>모닥불 용량</td><td class="n">4</td><td>200 · 400 · 600 · 800</td></tr>
+<tr><td>연료 효율</td><td class="n">5</td><td>150 · 250 · 350 · 500 · 700</td></tr>
+<tr><td>기본 재 수집</td><td class="n">8</td><td>350 · 400 · 450 … (+50)</td></tr>
+<tr><td>헌터 비용 절감</td><td class="n">5</td><td>300 · 350 · 400 · 450 · 500</td></tr>
 </table>
-
-
-<h3>채집 특성 — 트리 구조</h3>
-<p>파일(MiningTree·WoodcuttingTree 42노드): 세로 열 3개, <b>각 열이 위→아래 사슬</b>(위 노드를 사야 아래가 열림). 포인트 = 직업 레벨당 1, 노드 렙당 1. 열0 = 채광력·숙련·채광력%, 열1 = 다중·치명·속도·치피, 열2 = EXP·피해(전투 ATK). 열2는 전원 끝, 열0은 3_0(벌목은 4_0)까지 끝.</p>
-
-<h3>큐리오 — 계열 표 · 장착 · 롤</h3>
+<p><small>가격 = 게임 파일(GemShopConfig 가격 곡선). 지금까지 산 레벨 값의 합 11,700 이 세이브의 다이아 사용액과 일치(10-01).</small></p>
+</section>
+<section class="topic" id="t-curio">
+<h2>큐리오</h2>
+<div class="ans"><b>5칸(방어 · 채광 · 벌목 · 금화 · 전투) 한 세트로 고정</b>하고 바꿔 끼지 않는다. 낀 5개만 레벨을 올린다. 경험치 큐리오는 안 낀다.</div>
+<p>계정 공용, 진열대 5칸. 스탯과 코인은 <b>장착한 5개만</b> 친다. 목표 = 5계열(방어 · 채광 · 벌목 · 금화 · 전투)을 보라 이상으로 하나씩. 같은 계열 윗등급이 나오면 교체(분해 환급 80%). <b>전투 계열은 보라부터</b>라 그게 나올 때까지 5번째 칸은 임시 — 가진 것 중 제일 높은 등급을 낀다(이름만 다르면 같은 계열 두 개도 효과가 합쳐진다). 3개 중 고를 땐 아래 표 순서. 낀 5개 레벨만 올린다 — 임시(초록 · 파랑)는 30에서 멈춤. 승천 파랑 T6 · 보라 · 주황 T9. 지금 낀 것은 <b>지금 스펙</b> 탭 큐리오 줄.</p>
 <table>
 <tr><th>계열</th><th>등급 사다리 (아래 → 위, 괄호 = Lv1 주 스탯)</th><th>승천 보너스 (3티어마다 하나씩 다 찬다)</th></tr>
 <tr><td>방어·오프라인</td><td>의식용 단검(초록 ×1.16) → 매장된 가면(파랑 ×1.20) → <b>방종의 잔</b>(보라 ×1.25) → 비취 풍뎅이(주황 ×1.31)</td><td>T3 오프라인 +3% · T6 전투 오프라인 +3% · T9 마방 +9%</td></tr>
@@ -294,44 +447,116 @@ table.chk td{vertical-align:top}table.chk tr.ok td{color:var(--ink-3)}table.chk 
 <li><b>인벤</b>: 8칸(장착 5 포함)으로 충분하다. 다이아 인벤 확장은 안 산다 — 꽉 차서 뽑기가 막힐 때만.</li>
 <li><b>안 하는 것</b>: 코인 상한 확장 · 나선 낱개 구매(다이아 80) · 활동별 세트 교체(4명이 동시에 다른 일을 하므로 의미 없음).</li>
 </ul>
-
-<h3>다이아 — 다음 살 것 · 안 삼 · 가격표</h3>
-<p>산 것과 남은 다이아는 <b>지금 스펙</b> 탭(세이브 자동).<br>
-<b>다음 살 것(순서)</b>: 발전기 속도 2 → 3 → 4 (350 · 500 · 650, 모래 발전기 전체 ×2 → ×5) → 룬 소켓 4 · 5 · 6번째 (450 · 550 · 650, 3단계 4칸 조합이 준비될 때).<br>
-<b>조건이 생길 때만</b>: 큐리오 인벤(350, +2칸) = 8칸이 꽉 차서 뽑기가 막힐 때 · 용광로 용량(300, 동시 작업 +1) = 2칸이 계속 밀려 원재료가 쌓일 때.<br>
-<b>안 삼</b>: 운명의 나선 낱개(80 — 매일 무료분으로 천장까지 간다) · 헌터 비용 절감(첫 구매 1회만 할인, gem sink) · 창고·가방(재료는 옮기면 됨) · 룬 인벤(3개 합치면 줄음) · 연료 효율·기본 재 · 큐리오 코인 상한(DB: "초반엔 올리지 마라") · 스킨.</p>
-<table>
-<tr><th>품목</th><th class="n">최대</th><th>렙별 다이아</th></tr>
-<tr><td>발전기 속도</td><td class="n">4</td><td>200 · 350 · 500 · 650</td></tr>
-<tr><td>타임라인 엔진 속도</td><td class="n">4</td><td>250 · 400 · 550 · 700</td></tr>
-<tr><td>각성 증폭기 · 추가 균열 일꾼</td><td class="n">1</td><td>500 · 700</td></tr>
-<tr><td>일일 운명의 나선 · 나선 낱개</td><td class="n">1</td><td>900 · 낱개 80</td></tr>
-<tr><td>큐리오 인벤 (렙당 2칸)</td><td class="n">12</td><td>300 · 350 · 400 … (+50)</td></tr>
-<tr><td>큐리오 코인 한도 (렙당 +500)</td><td class="n">6</td><td>450 · 550 · 650 … (+100)</td></tr>
-<tr><td>룬 소켓</td><td class="n">9</td><td>150 · 250 · 350 · 450 · 550 · 650 · 800 · 950 · 1,100</td></tr>
-<tr><td>PRE 룬</td><td class="n">6</td><td>150 · 250 · 350 · 500 · 700 · 900</td></tr>
-<tr><td>룬 인벤 (렙당 4칸)</td><td class="n">9</td><td>200 · 250 · 300 … (+50)</td></tr>
-<tr><td>용광로 속도</td><td class="n">4</td><td>150 · 200 · 250 · 300</td></tr>
-<tr><td>용광로 다중제작 · 엔지니어 슬롯</td><td class="n">4</td><td>150 · 250 · 350 · 500</td></tr>
-<tr><td>용광로 용량</td><td class="n">2</td><td>300 · 450</td></tr>
-<tr><td>모닥불 용량</td><td class="n">4</td><td>200 · 400 · 600 · 800</td></tr>
-<tr><td>연료 효율</td><td class="n">5</td><td>150 · 250 · 350 · 500 · 700</td></tr>
-<tr><td>기본 재 수집</td><td class="n">8</td><td>350 · 400 · 450 … (+50)</td></tr>
-<tr><td>헌터 비용 절감</td><td class="n">5</td><td>300 · 350 · 400 · 450 · 500</td></tr>
-</table>
-<p><small>가격 = 게임 파일(GemShopConfig 가격 곡선). 지금까지 산 레벨 값의 합 11,700 이 세이브의 다이아 사용액과 일치(10-01).</small></p>
-
-
-<h3>열쇠 경제 · 기다림의 정체</h3>
-<table>
-<tr><th>열쇠 경제</th><td><b>보관 상한 30</b>(파일). 수입 = 일일 퀘스트 3 + Daily I·II 2 = 5/일(Daily III 사면 6). 25 넘기 전에 쓴다. 보스 카드 1장 ≈ 상자 2회(파일 50%) = 열쇠 2개 — 2단계 몫(전령 24 · 매바스 48 · 게 48 · 요툰 100 · 매머드 48) 약 166장 ≈ 열쇠 330개 ≈ 66일. <b>x5 버튼은 그 보스를 30회 처치해야 열린다</b>(파일) — 지금 이르사이니르 26 · 게 16 · 전령 14 · 매머드 14 · 요툰 12+라 아직 하나도 안 열림. x5는 싸움 시간만 줄이고 열쇠당 보상은 같다. <b>탑 41~50층</b>(티켓 10장 있음): 10층마다 열쇠 5 + 다이아 120, 5층마다 60 — 41층 보스(매머드 HP 480만/60초)가 잡히면 바로</td></tr>
-<tr><th>기다림의 정체</th><td>인피니트 I 4명분 기준, 긴 순서(10-03 세이브 이력 실측): <b>강철 제련 108일</b>(1명분 27일 — 강철 1회 60.5초, 용광로는 한 종류를 한 줄로만 돈다) · <b>초원 열쇠 I 240개</b>(하드 보스 상자 1회 = 보스 재료 100개, 열쇠는 1막 하드 몹에서 하루 2~4개 → 60~120일 — 하드 보스 "각 1회"(대량 상자는 10회) 조건은 처치만 세므로 열쇠 없이 됨) · <b>파란 물질 240</b>(3막 상점 하루 4개 = 60일) · 초원석 576,000(1막 하드 몹 5%, 1·3번 실측 시간당 950 = 22일 · 1번 혼자 650) · 강철 원재료(철광석 77만 2번 6~8일 · 물푸레 123만 3번 4일 · 파이어우드 51만 3번 6일 — 다중제작 3개 반영). 그래서 1·2단계에서 "빨리 되는 것"은 부캐 토륨 · 사냥꾼 3개 25 · 제물 공격 17·물방 15 · 싼 보스 카드 단계(전령 24 · 매바스 12) · 장신구이고, 인피니트·선스톤은 그 뒤에서 달 단위로 따라온다. 건너뛸 다음 티어는 없다 — 선스톤은 3막 채집(야자 약 110만 — 다중제작 반영), 인피니트는 하드 재료라 서로 안 막고 둘 다 길다</td></tr>
-</table>
-
 </section>
+<section class="topic" id="t-eng">
+<h2>엔지니어</h2>
+<div class="ans"><b>금화는 여기에 안 쓴다.</b> 지금 렙 · 다음 살 것 · 막힌 재료는 <a href="#now">지금 스펙</a> 탭이 세이브에서 띄운다.</div>
+<p>파일 + 실측(09-27 세이브 8회 연속): 슬롯 속도 = 2(젬) × (1 + 0.2×금화렙 + 0.05×(재료+나무+광석 렙)). 태양 1장 = 아이디어 1,420 · 설계도 24 · 룬 10 → <b>배율이 3.59 : 2.18 : 2.73 : 1 이면 넷이 맞물린다</b>. 슬롯4는 올리지 않는다. <b>금화는 상점용이라 여기엔 0</b>. 비용은 <b>항목 순환</b>(렙마다 목록의 다음 재료 1종, 한 바퀴마다 다음 칸 100→200→…→6,400→약 1만). 지금 렙·살 것·막힌 재료는 <b>지금 스펙</b> 탭이 세이브에서 자동으로 띄운다.</p>
+<h3>노드 구매 순서</h3>
+<p>룬 설계도·설계도 재고는 <b>슬롯4를 꺼야</b> 쌓인다(슬롯4가 룬 10·설계도 14를 사이클마다 먹음). <b>슬롯4 상태 = 지금 사려는 노드의 통화</b>: 태양이면 ON, 룬·설계도면 OFF. 단계마다 무엇을 사는지는 단계별 탭의 "엔지니어 노드" 줄.</p>
+<p>노드 구매 순서(파일 비용). 지금 렙은 단계별 탭 "엔지니어 노드" 줄. <b>아이디어</b>: 살 것 없음 — 채광 산업 40·조니 트리맨 40(무제한)은 그만, 병목 통화는 전부 생산에.</p>
+<table>
+<tr><th>통화</th><th>순서</th><th>노드</th><th>비용</th><th>얻는 것</th></tr>
+<tr><td rowspan="5">설계도</td><td>1</td><td><b>사냥꾼 세금 환급 II</b> (최대 5)</td><td>200·400·800·1,600·3,200</td><td>+5%/렙 확률로 사냥꾼 비용 50% 환급. I(최대 5)와 합쳐 50% → 사냥꾼 비용 기대치 −25%</td></tr>
+<tr><td>2</td><td>1막 상인 재고 (최대 3)</td><td>800·1,600</td><td>강화석 I 하루 +1씩</td></tr>
+<tr><td>3</td><td>기본 열쇠고리 (최대 5)</td><td>200·300·450·675·1,013</td><td>열쇠 보관 +1씩</td></tr>
+<tr><td>4</td><td>더 많은 사냥 I (최대 5)</td><td>800·1,200·1,800·2,700·4,050</td><td>사냥꾼 상한 +1씩 — 30에 닿을 때</td></tr>
+<tr><td>5</td><td>도전과제 헌터 (최대 10)</td><td>829·995·1,194·1,433·1,720</td><td>업적당 전리품 수량. 안 삼: 전투 경험치·제련 도안(무제한)</td></tr>
+<tr><td rowspan="6">룬 설계도</td><td>1</td><td><b>더 많은 재료 II</b> (최대 10)</td><td>400·480·576·691·829·995·1,194·1,433·1,720·2,064</td><td>전투 멀티루트 +1/렙 — 사냥꾼 재료 수량</td></tr>
+<tr><td>2</td><td>2막 상인 재고 (최대 3)</td><td>1,600</td><td>강화석 II 하루 +1</td></tr>
+<tr><td>3</td><td>소박한 제물 (최대 5)</td><td>200·400·800·1,600·3,200</td><td>제물 비용 50% 환급 확률 +5%/렙</td></tr>
+<tr><td>4</td><td>고급 열쇠고리 (최대 5)</td><td>200·300·450·675·1,013</td><td>열쇠 보관</td></tr>
+<tr><td>5</td><td>더 많은 제물 I (최대 5)</td><td>1,000·1,500·2,250·3,375·5,063</td><td>제물 상한 +1씩 — 20에 닿을 때</td></tr>
+<tr><td>6</td><td>더 많은 사냥 II (최대 5)</td><td>1,000·1,500·2,250·3,375·5,063</td><td>뒤: 원격 제작 5,000 · 룬 스택 2,000·5,000·10,000 · 빠른 부화 400×2ⁿ · 슬라임 먹이 400×4. 안 삼: 펫 훈련·모닥불 프로토타이핑(무제한)</td></tr>
+<tr><td rowspan="6">태양 두루마리</td><td>1</td><td><b>일일 활동 강화기 III</b> (최대 1)</td><td>60</td><td>열쇠 +1/일</td></tr>
+<tr><td>2</td><td>3막 상인 재고 (최대 3)</td><td>120·240·480</td><td>3막 상점 재고</td></tr>
+<tr><td>3</td><td>더 많은 재료 III (최대 10)</td><td>120·144·173·207·249·299·358·430·516·619</td><td>멀티루트 +1/렙</td></tr>
+<tr><td>4</td><td>4성 카드 (최대 1)</td><td>400</td><td>카드 4성 해금</td></tr>
+<tr><td>5</td><td>더 많은 사냥 III (최대 5) · 마스터 열쇠고리 (최대 5)</td><td>300·450·675·1,012·1,519 · 60·90·135·203·304</td><td>사냥꾼 상한 · 열쇠 보관</td></tr>
+<tr><td>6</td><td>원격 사냥 · 원격 제물 · 이중 치명타 · 무한 II 방어구·무기</td><td>600 · 600 · 120 · 400·600</td><td>창고 재료로 강화 · 치확 100% 넘을 때 · 4단계. 안 삼: 골드 연구(무제한)</td></tr>
+</table>
+</section>
+<section class="topic" id="t-gather">
+<h2>채집 · 도구</h2>
+<div class="ans"><b>채집은 타수가 줄 때만 는다</b>(2타 → 1타 = 2배). 토륨은 2막 노말이 하드보다 낫다.</div>
+<ul>
+<li>시간당 광맥(나무) 수 = 1,800 × 속도 ÷ 타수. 타수 = 내구 ÷ 한 타 피해를 올림한 값이라 계단식이다(게임 코드).</li>
+<li>내구: 1막 하드 구리 4,000 · 주석 8,000 · 철 12,000 · 물푸레 3,500 · 고크 7,200 · 파이어우드 11,000 / 2막 노말 토륨 4,000 · 강철나무 3,500 / 3막 선스톤 20,000 / 2막 하드 토륨 80,000 · 강철나무 70,000.</li>
+<li>1막 하드 채집은 수량 ×6, 2막 하드는 ×11. 2막 하드 토륨이 노말을 넘는 건 한 타 약 8,900 부터 — 선스톤 곡괭이 +4 로도 모자란다.</li>
+<li>도구는 철 · 강철 · 토륨 · 선스톤뿐이다(인피니트 도구 없음).</li>
+</ul>
+<h3>채집 특성</h3>
+<p>파일(MiningTree·WoodcuttingTree 42노드): 세로 열 3개, <b>각 열이 위→아래 사슬</b>(위 노드를 사야 아래가 열림). 포인트 = 직업 레벨당 1, 노드 렙당 1. 열0 = 채광력·숙련·채광력%, 열1 = 다중·치명·속도·치피, 열2 = EXP·피해(전투 ATK). 열2는 전원 끝, 열0은 3_0(벌목은 4_0)까지 끝.</p>
+</section>
+<section class="topic" id="t-hourglass">
+<h2>모래시계 아이템 · 레벨</h2>
+<div class="ans"><b>1 · 8 · 24시간 모래시계는 모아 둔다.</b> 쓰는 건 길드 과제 인장이 상한 전일 때의 채굴 · 벌목 부족분, 그리고 전투 레벨 문턱을 넘길 때.</div>
+<p><b>모래시계</b>(1·8·24시간)는 과제 인장이 상한 전일 때만 길드 채굴·벌목 부족분에 쓴다. 그 활동을 하는 캐릭터로 바꿔 놓고 쓴다. 남는 건 모아 둔다 — 오프라인 획득률이 오를수록 같은 모래시계가 더 준다.</p>
+<ul>
+<li>모래시계 = 그 캐릭터의 지금 시간당 값 × 시간. 사냥 자리에 세워 사냥 상태일 때 쓴다. 부캐가 2막 노말에서 내는 시간당 1,850~1,990마리는 몹이 나오는 속도 한계라 공격을 올려도 안 는다.</li>
+<li>레벨 L → L+1 경험치 = 49 × 1.3<sup>L</sup>(전투 · 채광 · 벌목 공통). 78 → 79 = 378억 · 79 → 80 = 492억.</li>
+<li>레벨 올리는 자리: 2 · 4번 = 2막 드라우그(2.12) · 3번 = 1막 하드. 2막 하드 몹은 경험치가 1막 하드의 12.6배다.</li>
+</ul>
+</section>
+<section class="topic" id="t-acc">
+<h2>장신구 · 이벤트 상점</h2>
+<div class="ans"><b>부적 · 반지는 보스 드랍으로 채운다.</b> 이벤트 상점 장비 3개(당근 반지 · 토끼 발 · 그림자강철 장갑)는 안 산다.</div>
+<ul>
+<li>노르딕 부적(요툰 5%, 부적 칸 · 공격 40 · 마방 70 · 이속 +5% · 치확 +7%): 1번은 끼고 있다 → 다음 것은 부캐 순서로.</li>
+<li>매머드 반지(매머드 10%, 공격 30 · 마방 100 · 공속 +10% · 치피 +30%): 부캐.</li>
+<li>0강으로 낀다. 강화 = 같은 아이템 3개(장착 1 + 대상 1 + 재료 1), 실패하면 2개 소멸 — 여분을 올려 성공하면 갈아 낀다.</li>
+</ul>
+<h3>파티 던전 이벤트 — 10월 7일까지</h3>
+<ul>
+<li><b>장비 3개(당근 반지 700 · 토끼 발 700 · 그림자강철 장갑 600)는 안 산다.</b> 코인은 큐리오 뽑기(25)에 쓴다.</li>
+<li>이유: 반지·부적 칸은 <b>보스 드랍</b>으로 채운다 — 매머드 반지(매머드 10%) · 변칙 반지(3막 2번째 보스 10%) · 노르딕 부적(요툰 5%) · 보스 부적(1막 보스). 드랍 장신구는 중복이 계속 나와 5강까지 올라가고 5강이면 공격이 2.5배다(매머드 반지 30 → 75 · 노르딕 부적 40 → 100, 파일 강화 곡선). 상점 장신구는 1개뿐이라 0강에 머문다(당근 반지 공격 50 · 토끼 발 30). 장갑 칸은 인피니트 I → 선스톤 → 인피니트 II 로 바뀐다.</li>
+<li>상점 장신구에만 있는 건 오프라인(+3% · +6%)과 드랍 +10인데, 오프라인 100%는 이것 없이 된다(아래).</li>
+<li>오프라인 획득률(파일 + DB): 기본 50% + PRE 룬 6개 12% + PRE 조합 20% + 매바스 카드 단계당 2%(100장 = 8%) + 타임라인 오프라인 노드 합 10% + 큐리오 방어 계열 T3 3% = 103%. 여기에 활동별(전투·채광·벌목) 오프라인이 카드·큐리오·타임라인에서 따로 붙는다. 10-01 정정: "당근 반지 → 토끼 발 산다" → 셋 다 안 산다(장신구는 보스 드랍 + 강화).</li>
+</ul>
+</section>
+<section class="topic" id="t-pet">
+<h2>펫</h2>
+<div class="ans"><b>남는 펫은 1번의 호박머리에게 먹인다.</b></div>
+<p>남는 펫(슬라임 · 박쥐)은 <b>1번의 호박머리</b>에게 먹인다. 먹일 수 있는 건 50레벨 펫뿐이고, 등급이 오르면 1레벨로 돌아가니 다시 50까지 올린 뒤 또 먹인다. 호박머리는 등급마다 드랍수량이 오른다(4등급 +12 → 5등급 +15 → 6등급 +18, 최대 6등급). 필요한 먹이 점수: 4 → 5등급 1,200 · 5 → 6등급 1,850. 먹이 한 마리 = 그 펫 등급 값(0등급 50 · 1등급 100 · 2등급 150 · 3등급 250) + 레벨당 1, 슬라임은 엔지니어 노드로 +30%(희귀 +50%). 무료 알은 16시간마다(슬라임 70% · 희귀 15% · 영웅 10% · 전설 5%). 2번의 모니(3등급)는 공격·방어·HP·경험치라 채광 캐릭엔 값이 작다 — 호박머리가 6등급이 된 뒤에. <small>게임 파일 PetConfig · 10-01</small></p>
+</section>
+<section class="topic" id="t-guild">
+<h2>길드 주간</h2>
+<div class="ans"><b>목요일 오전 9:00 초기화.</b> 과제 인장이 상한이면 더 채워도 인장이 안 나온다.</div>
+<!-- CHK:guild -->
+<p><b>과제 인장 3,060 / 3,060</b> — 상한, 더 채워도 인장 0(길드 활동도만) · 과제는 채우면 레벨이 올라 목표가 커진다(채굴 Lv2 40,000 → Lv3 80,000). 인장이 상한이면 모래시계를 길드용으로 쓰지 않는다.</p>
+<table>
+<tr><th>과제</th><th class="n">지금 / 목표</th><th>남은 것 · 모래시계</th></tr>
+<tr><td>지원 <small>Lv5/5</small></td><td class="n">5 / 7</td><td>2 남음</td></tr>
+<tr><td>기부 <small>Lv3/4</small></td><td class="n">8 / 10</td><td>2 남음</td></tr>
+<tr><td>보스 처치 <small>Lv5/5</small></td><td class="n">27 / 30</td><td>3 남음</td></tr>
+<tr><td>출석 <small>Lv5/5</small></td><td class="n">6 / 7</td><td>1 남음</td></tr>
+<tr><td>나무 베기 <small>Lv3/5</small></td><td class="n">42,956 / 80,000</td><td>37,044 남음</td></tr>
+<tr><td>몬스터 처치 <small>Lv5/5</small></td><td class="n">333,811 / 100,000</td><td>✔</td></tr>
+<tr><td>광석 채굴 <small>Lv3/5</small></td><td class="n">40,294 / 80,000</td><td>39,706 남음</td></tr>
+</table><p><small>2026-09-29 20:05 기준(서버 목표는 길드 창을 열 때 받아 온다) · 초기화 목요일 오전 9:00 KST · 모래시계 1시간 = 그 캐릭터 시간당 채집 수만큼 카운트(09-29 실측) · 조작 중인 캐릭만 · 3막에선 못 씀</small></p>
+<!-- /CHK:guild -->
+</section>
+<section class="topic" id="t-end">
+<h2>난이도 · 게임의 끝</h2>
+<div class="ans"><b>구현된 끝 = 1 · 2막 하드와 1 · 2막 악몽.</b> 현실 목표는 선스톤 + 2막 하드, 악몽은 선스톤을 맞춘 뒤 다시 본다.</div>
+<table>
+<tr><th>난이도</th><th>여는 조건</th><th class="n">몹 체력</th><th class="n">몹 공격</th><th>드랍</th></tr>
+<tr><td>1막 하드</td><td>3막 도시 도착(캐릭터별)</td><td class="n">300만</td><td class="n">1,400</td><td>전투 ×16 · 채집 ×6</td></tr>
+<tr><td>2막 하드</td><td>전투 80 + 1막 하드 보스 3종 각 1회 + 1막 어려움 카드 1장</td><td class="n">2,500만</td><td class="n">3,000</td><td>전투 ×16 · 채집 ×11</td></tr>
+<tr><td>1막 악몽</td><td>전투 90 + 하드 보스 3종 + 하드 카드</td><td class="n">3억</td><td class="n">4,100</td><td>전투 ×64 · 채집 ×12</td></tr>
+<tr><td>2막 악몽</td><td>전투 100 + 2막 하드 카드</td><td class="n">4.5억</td><td class="n">5,100</td><td>전투 ×64 · 채집 ×12</td></tr>
+</table>
+<ul>
+<li>1 · 2막 헬과 3막 하드 · 악몽 · 헬은 조건이 전투 1,500 이라 잠겨 있다(3막 것은 몹 공격 0 · 드랍표 없음 = 미구현).</li>
+<li>악몽 재료가 쓰이는 곳은 인피니트 II 와 강화석 · 수리석 II 뿐이다.</li>
+<li>3막 재료는 하드가 없어 노말 수량으로만 모인다.</li>
+</ul>
+</section>
+</section>
+
 <!-- ===================== 지금 스펙 ===================== -->
 <section class="tab" id="now">
-<h2>지금 스펙 — 마지막 세이브(표 끝 "갱신" 줄)</h2>
+<h2>지금 스펙 — 마지막 세이브</h2>
 <!-- NOW:BEGIN -->
 <table>
 <tr><th></th><th>1번 전사 (본캐)</th><th>2번 궁수</th><th>3번 마법사</th><th>4번 전사</th></tr>
@@ -358,23 +583,42 @@ table.chk td{vertical-align:top}table.chk tr.ok td{color:var(--ink-3)}table.chk 
 <tr><th>룬</th><td>줄0 PRE-PRE-PRE-PRE-PRE-PRE · 줄1 GOR-MU-HAS · 인벤 FUS 42 KI 37 MU 31 NIL 26 HAS 18 RYS 10 GOR 10 WOM 5 DOT 2 LUM 1 WIR 1 OLU 1 YIT 1</td></tr>
 <tr><th>큐리오</th><td>인벤 8칸 중 6 · 장착 이코르 표본 L20 T0 · 종복의 우상 L20 T1 · 방종의 잔 L20 T0 · 강령술사의 손 L20 T0 · 혼돈의 알 L20 T0 · 미장착 영원히 가려진 태양 L1 T0 · 뽑기 120회</td></tr>
 <tr><th>재료 (창고+가방)</th><td>투구 투구 23,828 · 트롤 우상 1,924 · 당근 4,499 · 견과 1,639 · 회중시계 4,218 · 마트료시카 인형 6,410 · 약간 손상된 유리 1,946 · 외알 안경 3,275 · 창촉 25,077 · 토륨 주괴 333 · 완벽한 모피 0 · 복슬복슬한 모피 1,906 · 북유럽 정수 82 · 결정화된 노란 물질 122 · 노란 깃털 62 · 빙정석 광석 332 · 강철 주괴 206 · 채드숯 830 · 장인의 액자 0 · 강화석 1 123 · 강화석 2 146</td></tr>
-<tr><th>갱신</th><td>10-03 14:40 세이브 — 게임 켠 채 <span class="mono">python tools/save.py</span> → <span class="mono">python tools/status.py</span></td></tr>
+<tr><th>갱신</th><td>10-03 14:52 세이브 — 게임 켠 채 <span class="mono">python tools/save.py</span> → <span class="mono">python tools/status.py</span></td></tr>
 </table>
 <!-- NOW:END -->
-<h2>화면에서 확인해 줄 것</h2>
-<ul>
-<li>2번이 하드 4구역에서 채집할 때 HP가 깎이는지 (2단계 배치)</li>
-</ul>
 <p><small>갱신: 게임 켠 채 <span class="mono">python tools/save.py</span> → <span class="mono">python tools/status.py</span> → <span class="mono">python publish.py "메시지"</span>. 스킨 도감 <a href="skins.html">skins.html</a>.</small></p>
+</section>
+
+<!-- ===================== 정정 이력 ===================== -->
+<section class="tab" id="fix">
+<h2>정정 이력 — 전에 틀리게 적혀 있던 것</h2>
+<div class="goal"><b>10-03 리메이크</b> — 첫 탭을 "지금 할 일"로 · 단계 표는 설명을 눌러서 펼치게 · 운·매일과 참고 탭을 주제별 한 탭으로 합침 · 타임라인 · 인피니트 I 재료 · 룬 표를 세이브에서 자동으로 · 2단계 타임라인 줄을 "20k 미만 칸 전부"로(옛 줄은 스탯 칸 순서였다) · 룬 줄에 실제 필요 개수 · "화면에서 확인해 줄 것" 삭제</div>
+<div class="goal"><b>정정 10-03</b> — <b>인피니트 I 보스 재료</b>(4명분) 각 4,000 → <b>각 8,000</b>: 풀 핵은 하드 보스 드랍이 아니라 게의 곡괭이 · 용의 뿔 · 죽음의 꽃 각 1,000 으로 만드는 제작품이라 1명분이 각 2,000 이다. 보스 재료는 1막 하드 보스 상자 1회 100개, 상자는 초원 열쇠 I(1막 하드 몹, 실측 하루 2~4개)로 연다 · <b>제련 시간 추가</b>: 강철 1회 60.5초(3개) → 1명분 강철 27일 · 4명분 108일 — "기다림의 정체"에서 제일 긴 줄(옛 글의 "파란 물질 80일 · 초원석 넉 달"은 틀린 값: 파란 물질은 3막 상인 재고 1렙이라 하루 4개 = 60일, 초원석은 1·3번 1막 하드 실측 시간당 950 = 22일)</div>
+<div class="goal"><b>정정 10-01</b> — <b>다중제작 누락</b>: 용광로 다중제작 4렙은 제련 1회에 3개가 나온다(철 주괴 · 숯 · 강철 단계마다 ÷3). 인피니트 I 강철 원재료(4명분) 철광석 6,912,000 → <b>768,000</b> · 물푸레 11,059,200 → <b>1,228,800</b> · 파이어우드 4,608,000 → <b>512,000</b>, 제련 230만 회 → 약 36만 회. 선스톤 야자 988만 → 약 110만 · <b>다이아</b>: 2단계 "큐리오 인벤 2 · 용광로 용량 1" 삭제(인벤 8칸 중 5칸 사용 · 용광로 2칸으로 안 밀림 — 조건이 생길 때만). 다이아로 살 건 발전기 속도 4(350 · 500 · 650)뿐. "다이아 가격은 파일에 없음" → 파일에 있었다(참고 탭 가격표) · <b>큐리오</b>: "계열당 1개" 삭제 — 이름만 다르면 같은 계열도 같이 끼고 효과가 합쳐진다. 전투 계열은 보라부터라 그때까지 5번째 칸은 임시. 큐리오 이름을 게임 화면 표기로(방종의 성배 → 방종의 잔 · 백년의 서 → 세기의 고서 · 항아리병 → 항아리 물병 등) · 매일 "큐리오 무료 롤 2회" → 1개 · 지금 스펙 "엔진 속도 1/1" → 발전기 속도 1/4 · 타임라인 엔진 속도 4/4</div>
+<div class="goal"><b>정정 09-29</b> — 보스 카드 "요툰 48에서 끝" → <b>지금 최대는 3성</b>(전령·이르사이니르 60장 · 게·요툰·매바스·매머드 100장), 4성(360 · 600장)은 태양 "4성 카드" 노드 뒤. 이르사이니르 "100장 = 4성" → <b>60장 = 3성(최대)</b>, 4성은 360장 · 보스 카드 순서를 열쇠 기준으로(카드 1장 ≈ 열쇠 2개): 전령 24 → 매바스 12 → 48 → 게 48 → 요툰 100 → 매머드 48 · 노르딕 "목걸이" → <b>부적</b>(장착 칸 = 부적, 토끼 발도 부적) · 모래시계는 <b>길드 주간 채굴·벌목 카운트에 들어간다</b>(1시간 → +346 실측) · 인피니트 I 강철 원재료 · 파티 던전 상점 순서 추가</div>
+<div class="goal"><b>정정 09-28</b> — <b>단계 탭을 시스템별 목표 표로</b>(사냥꾼 노드별 · 제물 종류별 · 엔지니어 슬롯 배율 · 노드 · 다이아 · 룬 · 강화 · 보스 · 카드), 지금 값은 세이브 자동 · <b>부캐 토륨 무기 안 만듦</b>: 매바스 방어 0(파일 스탯 번호표 — 9번은 방어가 아니라 마법 공격) → 무기는 시간만 줄이고 관문은 방어(커뮤니티 "보스는 방어 약 1,300"). 부캐 방어 계산 1,200~1,235(tools/combat.py) → 1단계 = 물방 제물 12 + 방어구 +5 → 1,325~1,363 · 구판 방어 계산의 물방 제물 배수 ×1.63 → 파일 ×1.5 · 사냥꾼 이름표 확정(위력 = LeBabka_Str · 방어 = LeBabka_Men · 힘 = LeBabka_PAtk) · 제물 비용 손계산 오류 10→15 36,927 → 62,333 등(표를 파일 곡선 자동으로)</div>
+<div class="goal"><b>정정 09-28 04:05</b> — 타임라인 트리 비용 오독(8바이트 값을 4바이트로 읽음): 방어 ×1.10 "7.85 IP" → <b>243 IP</b>(경로 합 248), 공격 ×1.10 → <b>256</b>. 지금 은행으로 되는 건 사암 샘플 1 · 3 · 4 까지. 1단계 부캐 방어는 원래대로 <b>물방 제물 12 + 방어구 +5</b>. 다이아는 타임라인 엔진 속도(0/4) 먼저 — 방어 243 까지 약 20시간 → 10시간</div>
+<div class="goal"><b>정정 09-27</b> — 엔지니어 "금화 12→13 먼저" 삭제(<b>금화는 상점용</b>) · 슬롯2~4 금화 가격 오류(슬롯별 곡선 1.5만·5만·15만 ×2ⁿ) · "표 뒤 ×2" → <b>항목 순환</b> 비용 · 속도 결합식 덧셈 × 젬 2배 실측 · 슬롯1만이 아니라 <b>4슬롯 비율</b>(3.59 : 2.18 : 2.73 : 1)로 · 엔지니어·채집 특성을 1~4단계 탭에 단계별로 분산 · 02:05 1단계 슬롯1 +4 → <b>+12</b>(공급≥수요 검사, +4는 슬롯3 누락) · 02:55 <b>탭 재분류</b>: 단계 = 캐릭이 어디 있나, 각 탭엔 그 단계에서 손대는 것만, 긴 표·설명은 새 <b>참고</b> 탭 · 03:15 QA: 2단계 4번 = 2막 노말 제물 담당(토륨은 3단계) · 3단계 "사냥꾼 42·제물 전부 20" 삭제(근거 없음, 16 이상은 4단계) · 하드 보스 입장에 열쇠 안 씀으로 통일 · 슬롯2는 총 +5까지만(+7이면 아이디어 다시 부족)</div>
+<div class="goal"><b>정정 09-26</b> — 채집 하드 배수 ×16 → <b>×6</b>(2단계 채집 14일 → 38일) · 2막 하드/1막 악몽 조건 "보스 각 10회" → <b>각 1회</b>(10회는 대량 상자) · 사냥꾼 "올 25" → <b>3개 25 + 나머지 20</b>(비용 곡선 실측) · 엔지니어 슬롯 업그레이드 4종 전부 생산 속도 · 제물 18~20은 4단계 2막 하드(×16)로 이동, 지금은 노말에서 공격 17·물방 15까지 · 뒤 단계 항목은 그 단계 배수로(킬 수) — 지금 스펙 기준 비교 삭제</div>
 </section>
 </main>
 <script>
 (function(){
   var btns=document.querySelectorAll('nav.tabs button'),secs=document.querySelectorAll('section.tab');
-  function show(id){btns.forEach(function(b){b.classList.toggle('on',b.dataset.t===id)});secs.forEach(function(s){s.classList.toggle('on',s.id===id)});try{localStorage.setItem('ev-tab',id)}catch(e){}}
-  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t)})});
-  var saved=null;try{saved=localStorage.getItem('ev-tab')}catch(e){}
-  if(saved&&document.getElementById(saved))show(saved);
+  function show(id){btns.forEach(function(b){b.classList.toggle('on',b.dataset.t===id)});secs.forEach(function(s){s.classList.toggle('on',s.id===id)})}
+  function go(h){h=(h||'').replace('#','');if(!h)return false;var el=document.getElementById(h);if(!el)return false;var sec=el.closest('section.tab');if(!sec)return false;
+    show(sec.id);if(el!==sec){if(el.tagName==='DETAILS')el.open=true;el.scrollIntoView()}else{window.scrollTo(0,0)}return true}
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t);history.replaceState(null,'','#'+b.dataset.t);window.scrollTo(0,0)})});
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');
+    if(a){if(go(a.getAttribute('href'))){e.preventDefault();history.replaceState(null,'',a.getAttribute('href'))}return}
+    var tr=e.target.closest('tr.has-why');
+    if(tr){var w=tr.nextElementSibling;if(w&&w.classList.contains('why')){w.classList.toggle('on');tr.classList.toggle('open')}}
+  });
+  var sd=document.getElementById('showdone');
+  if(sd){try{sd.checked=localStorage.getItem('ev-done')==='1'}catch(e){}
+    var f=function(){document.body.classList.toggle('showdone',sd.checked);try{localStorage.setItem('ev-done',sd.checked?'1':'0')}catch(e){}};sd.addEventListener('change',f);f()}
+  if(!go(location.hash))show('todo');
 })();
 </script>
 </body>
